@@ -1,6 +1,7 @@
 import { Children, Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, ShoppingCartIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Link } from 'react-router-dom'
 
 const user = {
     name: 'Tom Cook',
@@ -30,7 +31,9 @@ const NavBar = ({ children }: { children: React.ReactNode }) => {
                                 <div className="flex h-16 items-center justify-between">
                                     <div className="flex items-center">
                                         <div className="flex-shrink-0 text-white text-4xl font-bold ">
+                                            <Link to="/">
                                             Khandelwals
+                                            </Link>
                                         </div>
                                         <div className="hidden md:block">
                                             <div className="ml-10 flex items-baseline space-x-4">
@@ -38,9 +41,9 @@ const NavBar = ({ children }: { children: React.ReactNode }) => {
                                                     <input
                                                         type="text"
                                                         placeholder="Search..."
-                                                        className="px-4 py-2 mr-2 border border-gray-300 rounded focus:outline-none focus:border-blue-700"
+                                                        className="px-4 py-2 mr-2 border border-gray-300 rounded focus:outline-none focus:border-teal-700"
                                                     />
-                                                    <button className="bg-blue-700 text-white px-4 py-2 rounded">Search</button>
+                                                    <button className="bg-teal-600 text-white px-4 py-2 rounded">Search</button>
                                                 </div>
 
 
@@ -49,18 +52,18 @@ const NavBar = ({ children }: { children: React.ReactNode }) => {
                                     </div>
                                     <div className="hidden md:block">
                                         <div className="ml-4 flex items-center md:ml-6">
-                                            <button
-                                                type="button"
-                                                className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                                            <Link
+                                                to="/cart"
+                                                className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white "
                                             >
                                                 <span className="absolute -inset-1.5" />
                                                 <span className="sr-only">View Cart</span>
-                                                <span className="inline-flex items-center ml-4 -mb-1 rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10">
+                                                <span className="inline-flex items-center ml-4 -mb-1 rounded-md bg-red-50 px-2 py-1 text-xs font-bold text-red-700 ring-1 ring-inset ring-red-600/10">
                                                     4
                                                 </span>
                                                 <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
                                                 
-                                            </button>
+                                            </Link>
 
                                             {/* Profile dropdown */}
                                             <Menu as="div" className="relative ml-10">
@@ -124,9 +127,9 @@ const NavBar = ({ children }: { children: React.ReactNode }) => {
                                         <input
                                             type="text"
                                             placeholder="Search..."
-                                            className="px-4 py-2 mr-2 border border-gray-300 rounded focus:outline-none focus:border-blue-700"
+                                            className="px-4 py-2 mr-2 border border-gray-300 rounded focus:outline-none focus:border-teal-700"
                                         />
-                                        <button className="bg-blue-700 text-white px-4 py-2 rounded">Search</button>
+                                        <button className="bg-teal-600 text-white px-4 py-2 rounded">Search</button>
                                     </div>
 
 
@@ -140,9 +143,9 @@ const NavBar = ({ children }: { children: React.ReactNode }) => {
                                             <div className="text-base font-medium leading-none text-white">{user.name}</div>
                                             <div className="text-sm font-medium leading-none text-gray-400">{user.email}</div>
                                         </div>
-                                        <button
-                                            type="button"
-                                            className="relative ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                                        <Link
+                                            to="/cart"
+                                            className="relative ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white"
                                         >
                                             <span className="absolute -inset-1.5" />
                                             <span className="sr-only">View Cart</span>
@@ -151,7 +154,7 @@ const NavBar = ({ children }: { children: React.ReactNode }) => {
                                             </span>
                                             <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
                                            
-                                        </button>
+                                        </Link>
                                     </div>
                                     <div className="mt-3 space-y-1 px-2">
                                         {userNavigation.map((item) => (
