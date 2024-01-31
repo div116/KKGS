@@ -124,28 +124,37 @@ export const ProductList = () => {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
   const products = useSelector(selectAllProducts);
   const [filter, setFilter] = useState({})
+  const [sort, setSort] = useState({})
 
-  const handleFilterChange = (id: string, value: string) => {
-    let newFilter = { ...filter, [id]: value }
-    console.log(newFilter)
-    setFilter(newFilter)
-    dispatch(fetchAllProductsByFilterAsync(newFilter) as any)
+  const handleFilterChange = (event: any, id: string, value: string) => {  
+    const newFilter = {...filter};
+    // TODO : on server it will support multiple categories
+    if(event.target.checked){
+      if(newFilter[id]){
+        newFilter[id].push(value)
+      } else{
+        newFilter[id] = [value]
+      }
+    } else{
+       const index = newFilter[id].findIndex(el=>el===value)
+       newFilter[id].splice(index,1);
+    }
+    setFilter(newFilter);
   }
 
 
-  const handleSortChange = (sort: string, order: string) => {
-    let newFilter = { ...filter, _sort: sort, _order: order }
-    dispatch(fetchAllProductsByFilterAsync(newFilter) as any)
+  const handleSortChange = (sortType: string, order: string) => {
+    let newSort = { ...sort, _sort: sortType, _order: order }
+    setSort(newSort)
 
   }
 
   useEffect(() => {
-    dispatch(fetchAllProductsAsync() as any)
-  }, [dispatch])
+    dispatch(fetchAllProductsByFilterAsync({filter, sort}) as any)
+  }, [dispatch, filter, sort])
 
 
   return (
-
     <div className="bg-white">
       <div>
         {/* Mobile filter dialog */}
@@ -378,7 +387,7 @@ const DesktopFilter = ({ handleFilterChange, subCategories, filters }: any) => {
                         defaultValue={option.value}
                         type="checkbox"
                         defaultChecked={option.checked}
-                        onChange={(e) => handleFilterChange(section.id, option.value)}
+                        onChange={(e) => handleFilterChange(event, section.id, option.value)}
                         className="h-4 w-4 rounded border-gray-300 text-teal-600 focus:ring-teal-500"
                       />
                       <label
