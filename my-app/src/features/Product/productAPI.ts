@@ -10,7 +10,7 @@ export const fetchAllProducts = async () => {
 }
 
 // write the function when multiple filter is selected to modify query
-export const fetchAllProductsByFilter = async (filter: any, sort: any) => {
+export const fetchAllProductsByFilter = async (filter: any, sort: any, pagination: any) => {
   // filters = {category: ["smartphones", "laptops"]}
   //sort = {_sort: "price", _order: "asc"}
   let queryString = '';
@@ -27,10 +27,14 @@ export const fetchAllProductsByFilter = async (filter: any, sort: any) => {
     queryString += `${key}=${sort[key]}&`
   }
 
+  for (let key in pagination) {
+    queryString += `${key}=${pagination[key]}&`
+  }
+
   return new Promise(async resolve => {
     console.log("http://localhost:8080/products?" + queryString)
     const data = await axios.get("http://localhost:8080/products?" + queryString);
-    resolve(data)
+    resolve(data.data)
   }
   )
 }
