@@ -1,8 +1,10 @@
 import styles from "./Counter.module.css"
 import {
+  fetchAllBrandsAsync,
+  fetchAllCategoriesAsync,
   fetchAllProductsAsync,
   fetchAllProductsByFilterAsync,
-  increment, selectAllProducts
+  increment, selectAllBrands, selectAllCategories, selectAllProducts, selectTotalItems
 } from "../productSlice"
 
 import { Fragment, useEffect, useState } from 'react'
@@ -34,86 +36,7 @@ const subCategories = [
   { name: 'Hip Bags', href: '#' },
   { name: 'Laptop Sleeves', href: '#' },
 ]
-const filters = [
-  {
-    id: 'category',
-    name: 'Category',
-    options: [{ value: 'smartphones', label: 'smartphones', checked: false },
-    { value: 'laptops', label: 'laptops', checked: false },
-    { value: 'fragrances', label: 'fragrances', checked: false },
-    { value: 'skincare', label: 'skincare', checked: false },
-    { value: 'groceries', label: 'groceries', checked: false },
-    { value: 'home-decoration', label: 'home decoration', checked: false }
-    ],
-  },
-  {
-    id: 'brand',
-    name: 'Brands',
-    options: [{ value: 'Apple', label: 'Apple', checked: false },
-    { value: 'Samsung', label: 'Samsung', checked: false },
-    { value: 'OPPO', label: 'OPPO', checked: false },
-    { value: 'Huawei', label: 'Huawei', checked: false },
-    {
-      value: 'Microsoft Surface',
-      label: 'Microsoft Surface',
-      checked: false
-    },
-    { value: 'Infinix', label: 'Infinix', checked: false },
-    { value: 'HP Pavilion', label: 'HP Pavilion', checked: false },
-    {
-      value: 'Impression of Acqua Di Gio',
-      label: 'Impression of Acqua Di Gio',
-      checked: false
-    },
-    { value: 'Royal_Mirage', label: 'RoyalMirage', checked: false },
-    {
-      value: 'Fog Scent Xpressio',
-      label: 'Fog Scent Xpressio',
-      checked: false
-    },
-    { value: 'Al Munakh', label: 'Al Munakh', checked: false },
-    {
-      value: 'Lord - Al-Rehab',
-      label: 'Lord Al Rehab',
-      checked: false
-    },
-    {
-      value: 'L\'Oreal Paris',
-      label: 'LOreal Paris',
-      checked: false
-    },
-    { value: 'Hemani Tea', label: 'Hemani Tea', checked: false },
-    { value: 'Dermive', label: 'Dermive', checked: false },
-    {
-      value: 'ROREC White Rice',
-      label: 'ROREC White Rice',
-      checked: false
-    },
-    { value: 'Fair & Clear', label: 'Fair & Clear', checked: false },
-    { value: 'Saaf & Khaas', label: 'Saaf & Khaas', checked: false },
-    {
-      value: 'Bake Parlor Big',
-      label: 'Bake Parlor Big',
-      checked: false
-    },
-    {
-      value: 'Baking Food Items',
-      label: 'Baking Food Items',
-      checked: false
-    },
-    { value: 'fauji', label: 'fauji', checked: false },
-    { value: 'Dry Rose', label: 'Dry Rose', checked: false },
-    { value: 'Boho Decor', label: 'Boho Decor', checked: false },
-    { value: 'Flying Wooden', label: 'Flying Wooden', checked: false },
-    { value: 'LED Lights', label: 'LED Lights', checked: false },
-    {
-      value: 'luxury palace',
-      label: 'luxury palace',
-      checked: false
-    },
-    { value: 'Golden', label: 'Golden', checked: false }],
-  },
-]
+
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
@@ -124,23 +47,39 @@ export const ProductList = () => {
   const dispatch = useDispatch()
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
   const products = useSelector(selectAllProducts);
+  const totalItems = useSelector(selectTotalItems);
+  const categories = useSelector(selectAllCategories);
+  const brands = useSelector(selectAllBrands);
   const [filter, setFilter] = useState({})
   const [sort, setSort] = useState({})
   const [page, setPage] = useState(1)
-  const totalPages = Math.ceil(100/ Items_Per_Page)
+  const totalPages = Math.ceil(totalItems / Items_Per_Page)
 
-  const handleFilterChange = (event: any, id: string, value: string) => {  
-    const newFilter = {...filter};
+  const filters = [
+    {
+      id: 'category',
+      name: 'Category',
+      options: categories
+    },
+    {
+      id: 'brand',
+      name: 'Brands',
+      options: brands,
+    },
+  ]
+
+  const handleFilterChange = (event: any, id: string, value: string) => {
+    const newFilter = { ...filter };
     // TODO : on server it will support multiple categories
-    if(event.target.checked){
-      if(newFilter[id]){
+    if (event.target.checked) {
+      if (newFilter[id]) {
         newFilter[id].push(value)
-      } else{
+      } else {
         newFilter[id] = [value]
       }
-    } else{
-       const index = newFilter[id].findIndex(el=>el===value)
-       newFilter[id].splice(index,1);
+    } else {
+      const index = newFilter[id].findIndex(el => el === value)
+      newFilter[id].splice(index, 1);
     }
     setFilter(newFilter);
   }
@@ -160,15 +99,24 @@ export const ProductList = () => {
       _page: page,
       _per_page: Items_Per_Page
     }
-    dispatch(fetchAllProductsByFilterAsync({filter, sort, pagination}) as any)
+    dispatch(fetchAllProductsByFilterAsync({ filter, sort, pagination }) as any)
   }, [dispatch, filter, sort, page])
+
+  useEffect(() => {
+    setPage(1)
+  }, [totalItems])
+
+  useEffect(() => {
+    dispatch(fetchAllBrandsAsync() as any)
+    dispatch(fetchAllCategoriesAsync() as any)
+  }, [])
 
 
   return (
     <div className="bg-white">
       <div>
         {/* Mobile filter dialog */}
-        <MobileFilter handleFilterChange={handleFilterChange} mobileFiltersOpen={mobileFiltersOpen} setMobileFiltersOpen={setMobileFiltersOpen}></MobileFilter>
+        <MobileFilter handleFilterChange={handleFilterChange} mobileFiltersOpen={mobileFiltersOpen} setMobileFiltersOpen={setMobileFiltersOpen} filters={filters}></MobileFilter>
 
         <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24">
@@ -247,7 +195,7 @@ export const ProductList = () => {
             </div>
           </section>
           {/* pagination starts here */}
-          <Pagination products={products} page={page} totalPages={totalPages} handlepageChange={handlepageChange}></Pagination>
+          <Pagination page={page} totalPages={totalPages} handlepageChange={handlepageChange} totalItems={totalItems}></Pagination>
         </main>
       </div>
     </div>
@@ -255,7 +203,7 @@ export const ProductList = () => {
 }
 
 
-const MobileFilter = ({ handleFilterChange, mobileFiltersOpen, setMobileFiltersOpen }: any) => {
+const MobileFilter = ({ handleFilterChange, mobileFiltersOpen, setMobileFiltersOpen, filters }: any) => {
   return (
     <Transition.Root show={mobileFiltersOpen} as={Fragment}>
       <Dialog as="div" className="relative z-40 lg:hidden" onClose={setMobileFiltersOpen}>
@@ -418,66 +366,6 @@ const DesktopFilter = ({ handleFilterChange, subCategories, filters }: any) => {
   );
 }
 
-const Pagination = ({products, page, totalPages, handlepageChange} : any) => {
-  return (
-    <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
-      <div className="flex flex-1 justify-between sm:hidden">
-        <a
-          href="#"
-          className="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-        >
-          Previous
-        </a>
-        <a
-          href="#"
-          className="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-        >
-          Next
-        </a>
-      </div>
-      <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
-        <div>
-          <p className="text-sm text-gray-700">
-            Showing <span className="font-medium">{(page-1)*Items_Per_Page+1}</span> to <span className="font-medium">{page*Items_Per_Page}</span> of{' '}
-            <span className="font-medium">100</span> results
-          </p>
-        </div>
-        <div>
-          <nav className="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
-            <a
-              href="#"
-              className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
-            >
-              <span className="sr-only">Previous</span>
-              <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
-            </a>
-            {/* Current: "z-10 bg-teal-600 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600", Default: "text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-offset-0" */}
-            {
-              totalPages > 0 && [...Array(totalPages)].map((_, index) => (
-                <div
-                  onClick={() => handlepageChange(index+1)}
-                  style={{ cursor: 'pointer' }}
-                  key={index}
-                  aria-current="page"
-                  className={`relative z-10 inline-flex items-center ${index+1 === page ? 'bg-teal-600 text-white' : 'text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-offset-0'} px-4 py-2 text-sm font-semibold focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600`}
-                > {index + 1} </div>
-              ))
-            }
-            
-            <a
-              href="#"
-              className="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
-            >
-              <span className="sr-only">Next</span>
-              <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
-            </a>
-          </nav>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 const ProductGrid = ({ products }: { products: any }) => {
   return (
     <div className="lg:col-span-3">
@@ -519,6 +407,58 @@ const ProductGrid = ({ products }: { products: any }) => {
             ))}
 
           </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+const Pagination = ({ page, totalPages, handlepageChange, totalItems }: any) => {
+  return (
+    <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
+      <div className="flex flex-1 justify-between sm:hidden">
+        <div  style={{ cursor: 'pointer' }} className="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+         onClick={() => handlepageChange(page - 1> 0 ? page - 1 : 1)}>
+          Previous
+        </div>
+        <div style={{ cursor: 'pointer' }} className="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+         onClick={() => handlepageChange(totalPages > page ? page + 1 : page)}>
+          Next
+        </div>
+      </div>
+      <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+        <div>
+          <p className="text-sm text-gray-700">
+            Showing <span className="font-medium">{(page - 1) * Items_Per_Page + 1}</span> to <span className="font-medium">{page * Items_Per_Page > totalItems ? totalItems : page * Items_Per_Page}</span> of{' '}
+            <span className="font-medium">{totalItems}</span> results
+          </p>
+        </div>
+        <div>
+          <nav className="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
+            <div  style={{ cursor: 'pointer' }} className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+             onClick={() => handlepageChange(page - 1> 0 ? page - 1 : 1)}>
+              <span className="sr-only">Previous</span>
+              <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
+            </div>
+            {/* Current: "z-10 bg-teal-600 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600", Default: "text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-offset-0" */}
+            {
+              totalPages > 0 && [...Array(totalPages)].map((_, index) => (
+                <div
+                  onClick={() => handlepageChange(index + 1)}
+                  style={{ cursor: 'pointer' }}
+                  key={index}
+                  aria-current="page"
+                  className={`relative z-10 inline-flex items-center ${index + 1 === page ? 'bg-teal-600 text-white' : 'text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-offset-0'} px-4 py-2 text-sm font-semibold focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600`}
+                > {index + 1} </div>
+              ))
+            }
+
+            <div  style={{ cursor: 'pointer' }} className="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+             onClick={() => handlepageChange(totalPages > page ? page + 1 : page)}>
+              <span className="sr-only">Next</span>
+              <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
+            </div>
+          </nav>
         </div>
       </div>
     </div>

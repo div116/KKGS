@@ -32,9 +32,24 @@ export const fetchAllProductsByFilter = async (filter: any, sort: any, paginatio
   }
 
   return new Promise(async resolve => {
-    console.log("http://localhost:8080/products?" + queryString)
-    const data = await axios.get("http://localhost:8080/products?" + queryString);
-    resolve(data.data)
+    const data : any= await axios.get("http://localhost:8080/products?" + queryString);
+    resolve({products: data.data.data, totalItems: data.data.items})
+  }
+  )
+}
+
+export const fetchAllCategories = async () => {
+  return new Promise(async resolve => {
+    const data = await axios.get("http://localhost:8080/categories");
+    resolve(data)
+  }
+  )
+}
+
+export const fetchAllBrands = async () => {
+  return new Promise(async resolve => {
+    const data = await axios.get("http://localhost:8080/brands");
+    resolve(data)
   }
   )
 }
