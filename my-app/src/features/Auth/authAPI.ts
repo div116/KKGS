@@ -1,9 +1,28 @@
+import axios from "axios";
+
 // A mock function to mimic making an async request for data
-export const fetchCount = async () => {
+export const createUser = async (data) => {
   return new Promise(async resolve => {
-   const response = await fetch("http://localhost:8080");
-   const data = await response.json();
-   resolve(data)
+    const response = await axios.post("http://localhost:8080/users", data);
+    resolve(response.data);
+    });
+
   }
-  )
-}
+
+  export const loginUser = async (data) => {
+    return new Promise(async (resolve, reject) => {
+      let email = data.email
+      let password = data.password
+      const response = await axios.get("http://localhost:8080/users"+"?email="+email+"&password="+password);
+      if(response.data.length) {
+        resolve(response.data[0]);
+      }
+      else {
+        reject({"Message ": "InValid Credentials"})
+      }
+      });
+  }
+
+  
+  
+

@@ -5,38 +5,39 @@ import SignUpPage from "./pages/SignUpPage"
 import CartPage from "./pages/CartPage";
 import CheckOut from "./pages/CheckOut";
 import ProductDetailsPage from "./pages/ProductDetailsPage";
+import Protected from "./features/Auth/Components/Protected";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element:<Home></Home>
+    element: <Protected> <Home></Home></Protected>
   },
   {
     path: "/login",
-    element:<LoginPage></LoginPage>
+    element: <LoginPage></LoginPage>
   },
   {
     path: "/signup",
-    element:<SignUpPage></SignUpPage>
+    element: <SignUpPage></SignUpPage>
   },
   {
     path: "/cart",
-    element: <CartPage></CartPage>
+    element: <Protected> <CartPage></CartPage> </Protected>
   },
   {
     path: "/checkout",
-    element: <CheckOut></CheckOut>
+    element: <Protected> <CheckOut></CheckOut></Protected>
   },
   {
-    path: "/product-details",
-    element: <ProductDetailsPage></ProductDetailsPage>
+    path: "/product-details/:id",
+    element: <Protected> <ProductDetailsPage></ProductDetailsPage></Protected>
   }
 ]);
 
 const App = () => {
   return (
     <>
-     <RouterProvider router={router} />
+      <RouterProvider router={router} />
     </>
   )
 }

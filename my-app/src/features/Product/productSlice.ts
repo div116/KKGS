@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, type PayloadAction } from "@reduxjs/toolkit"
-import { fetchAllBrands, fetchAllCategories, fetchAllProducts, fetchAllProductsByFilter } from "./productAPI"
+import { fetchAllBrands, fetchAllCategories, fetchAllProducts, fetchAllProductsByFilter, fetchProductById } from "./productAPI"
 
 
 export interface ProductSliceState {
@@ -7,7 +7,8 @@ export interface ProductSliceState {
   categories: any,
   brands: any,
   status: "idle" | "loading" | "failed",
-  totalItems: number
+  totalItems: number,
+  selectedProductByID: any
 }
 
 const initialState: ProductSliceState = {
@@ -15,27 +16,32 @@ const initialState: ProductSliceState = {
   categories: [],
   brands: [],
   status: "idle",
-  totalItems: 0
-
+  totalItems: 0,
+  selectedProductByID: null
 }
 
 export const fetchAllProductsAsync = createAsyncThunk('product/fetchAllProducts', async () => {
-  const response : any = await fetchAllProducts()
+  const response: any = await fetchAllProducts()
   return response.data
 })
 
-export const fetchAllProductsByFilterAsync = createAsyncThunk('product/fetchAllProductsByFilter', async ({filter, sort, pagination} : any) => {
-  const response : any = await fetchAllProductsByFilter(filter,sort, pagination)
+export const fetchAllProductsByFilterAsync = createAsyncThunk('product/fetchAllProductsByFilter', async ({ filter, sort, pagination }: any) => {
+  const response: any = await fetchAllProductsByFilter(filter, sort, pagination)
   return response
 })
 
 export const fetchAllCategoriesAsync = createAsyncThunk('product/fetchAllCategories', async () => {
-  const response : any = await fetchAllCategories()
+  const response: any = await fetchAllCategories()
   return response.data
 })
 
 export const fetchAllBrandsAsync = createAsyncThunk('product/fetchAllBrands', async () => {
-  const response : any = await fetchAllBrands()
+  const response: any = await fetchAllBrands()
+  return response.data
+})
+
+export const fetchProductByIdAsync = createAsyncThunk('product/fetchProductById', async (id: any) => {
+  const response: any = await fetchProductById(id)
   return response.data
 })
 
@@ -44,51 +50,57 @@ export const productSlice = createSlice({
   initialState,
   reducers: create => ({
     increment: create.reducer(state => {
-      
     })
   }),
- extraReducers(builder) {
-   builder
-     .addCase(fetchAllProductsAsync.pending, (state, action) => {
-       state.status = "loading"
-     })
-     .addCase(fetchAllProductsAsync.fulfilled, (state, action) => {
-       state.status = "idle"
-       state.products = action.payload
-     })
-     .addCase(fetchAllProductsAsync.rejected, (state, action) => {
-       state.status = "failed"
-     })
-     .addCase(fetchAllProductsByFilterAsync.pending, (state, action) => {
-       state.status = "loading"
-     })
-     .addCase(fetchAllProductsByFilterAsync.fulfilled, (state, action) => {
-       state.status = "idle"
-       state.products = action.payload.products
-       state.totalItems = action.payload.totalItems
-     })
-     .addCase(fetchAllProductsByFilterAsync.rejected, (state, action) => {
-       state.status = "failed"
-     })
-     .addCase(fetchAllCategoriesAsync.pending, (state, action) => {
-       state.status = "loading"
-     })
-     .addCase(fetchAllCategoriesAsync.fulfilled, (state, action) => {
-       state.status = "idle"
-       state.categories  = action.payload
-     })
-     .addCase(fetchAllBrandsAsync.pending, (state, action) => {
-       state.status = "loading"
-     })
-     .addCase(fetchAllBrandsAsync.fulfilled, (state, action) => {
-       state.status = "idle"
-       state.brands = action.payload
-     })
- },
+  extraReducers(builder) {
+    builder
+      .addCase(fetchAllProductsAsync.pending, (state, action) => {
+        state.status = "loading"
+      })
+      .addCase(fetchAllProductsAsync.fulfilled, (state, action) => {
+        state.status = "idle"
+        state.products = action.payload
+      })
+      .addCase(fetchAllProductsAsync.rejected, (state, action) => {
+        state.status = "failed"
+      })
+      .addCase(fetchAllProductsByFilterAsync.pending, (state, action) => {
+        state.status = "loading"
+      })
+      .addCase(fetchAllProductsByFilterAsync.fulfilled, (state, action) => {
+        state.status = "idle"
+        state.products = action.payload.products
+        state.totalItems = action.payload.totalItems
+      })
+      .addCase(fetchAllProductsByFilterAsync.rejected, (state, action) => {
+        state.status = "failed"
+      })
+      .addCase(fetchAllCategoriesAsync.pending, (state, action) => {
+        state.status = "loading"
+      })
+      .addCase(fetchAllCategoriesAsync.fulfilled, (state, action) => {
+        state.status = "idle"
+        state.categories = action.payload
+      })
+      .addCase(fetchAllBrandsAsync.pending, (state, action) => {
+        state.status = "loading"
+      })
+      .addCase(fetchAllBrandsAsync.fulfilled, (state, action) => {
+        state.status = "idle"
+        state.brands = action.payload
+      })
+      .addCase(fetchProductByIdAsync.pending, (state, action) => {
+        state.status = "loading"
+      })
+      .addCase(fetchProductByIdAsync.fulfilled, (state, action) => {
+        state.status = "idle"
+        state.selectedProductByID = action.payload
+      })
+  },
 })
 
 
-export const {increment } = productSlice.actions
+export const { increment } = productSlice.actions
 
 export const selectAllProducts = (state: any) => state.product.products
 
@@ -97,6 +109,8 @@ export const selectTotalItems = (state: any) => state.product.totalItems
 export const selectAllCategories = (state: any) => state.product.categories
 
 export const selectAllBrands = (state: any) => state.product.brands
+
+export const selectedProduct = (state: any) => state.product.selectedProductByID
 
 
 export default productSlice.reducer;

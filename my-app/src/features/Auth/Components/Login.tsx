@@ -1,9 +1,40 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useForm } from 'react-hook-form'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, Navigate } from 'react-router-dom'
+import { checkUserAsync } from '../authSlice'
+import { loggedUser, loginError } from '../authSlice'
+
 
 const Login = () => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm() as any
+
+  const user = useSelector(loggedUser)
+  const error = useSelector(loginError)
+  const dispatch = useDispatch();
+  
+  console.log("errorlogin", error)
+
+  console.log("user hai ki nhi", user)
+
+  const onSubmit = (data) => {
+    let userdata = {
+      email: data.email,
+      password: data.password
+    }
+    dispatch(checkUserAsync(userdata) as any)
+  }
+
+ 
+
   return (
     <>
+       {user && <Navigate to="/"></Navigate>}
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm text-center text-3xl text-teal-600 font-bold">
           Khandelwals
@@ -13,7 +44,7 @@ const Login = () => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST">
+          <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
             <div>
               <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
                 Email address
@@ -21,12 +52,10 @@ const Login = () => {
               <div className="mt-2">
                 <input
                   id="email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  required
+                  {...register("email", { required: true, pattern: { value: /\S+@\S+\.\S+/, message: "Invalid email address" } })}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
                 />
+                <p className="text-red-500">{errors?.email?.message}</p>
               </div>
             </div>
 
@@ -43,13 +72,11 @@ const Login = () => {
               </div>
               <div className="mt-2">
                 <input
-                  id="password"
-                  name="password"
+                  {...register("password", { required: true })}
                   type="password"
-                  autoComplete="current-password"
-                  required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
                 />
+
               </div>
             </div>
 

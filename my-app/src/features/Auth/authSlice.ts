@@ -1,35 +1,76 @@
-import type { PayloadAction } from "@reduxjs/toolkit"
-import { createAppSlice } from "../../app/createAppSlice"
-import type { AppThunk } from "../../app/store"
-import { fetchCount } from "./authAPI"
+import { createAsyncThunk, createSlice, type PayloadAction } from "@reduxjs/toolkit"
+import { createUser, loginUser } from "./authAPI"
 
-export interface CounterSliceState {
-  value: number
-  status: "idle" | "loading" | "failed"
+export interface AuthSliceState {
+  registeredUser: any
+  loggedInUser: any
+  status: "idle" | "loading" | "failed",
+  error: any  
 }
 
-const initialState: CounterSliceState = {
-  value: 0,
+const initialState: AuthSliceState = {
+  registeredUser: null,
+  loggedInUser: null,
   status: "idle",
+  error: null
 }
 
+export const createUserAsync = createAsyncThunk("user/createUser", async (data: { email: string; password: string }) => {
+  const response: any = await createUser(data)
+  return response
+}
+)
 
-export const counterSlice = createAppSlice({
-  name: "counter",
-  initialState,
-  reducers: create => ({
-    increment: create.reducer(state => {
-      state.value += 1
-    })
-  }),
-  selectors: {
-    selectCount: counter => counter.value,
-    selectStatus: counter => counter.status,
-  },
+export const checkUserAsync = createAsyncThunk("user/checkUser", async (data: { email: string; password: string }) => {
+  try {
+    const response: any = await loginUser(data)
+    console.log("response", response);
+    return response
+  } catch (error) {
+    throw error = "Invalid Credentials"
+  }
 })
 
+export const authSlice = createSlice({
+  name: "user",
+  initialState,
+  reducers: create => ({
 
-export const {increment } = counterSlice.actions
+  }),
+  extraReducers: (builder) => {
+    builder
+      .addCase(createUserAsync.pending, (state, action) => {
+        state.status = "loading"
+      })
+      .addCase(createUserAsync.fulfilled, (state, action) => {
+        state.status = "idle"
+        state.registeredUser = action.payload
+      })
+      .addCase(createUserAsync.rejected, (state, action) => {
+        state.status = "failed"
+      })
+      .addCase(checkUserAsync.pending, (state, action) => {
+        state.status = "loading"
+      })
+      .addCase(checkUserAsync.fulfilled, (state, action) => {
+        state.status = "idle"
+        state.loggedInUser = action.payload
+      })
+      .addCase(checkUserAsync.rejected, (state, action) => {
+        state.status = "failed"
+        state.error = action.error
+      })
 
-export const { selectCount } = counterSlice.selectors
+  }
+})
+
+export const User = (state: any) => state.auth.registeredUser
+
+export const loggedUser = (state: any) => state.auth.loggedInUser
+export const loginError = (state: any) => state.auth.error
+
+export default authSlice.reducer;
+
+
+
 
