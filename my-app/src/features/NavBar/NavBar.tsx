@@ -2,6 +2,8 @@ import { Children, Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, ShoppingCartIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { getaddedCartItems } from '../Cart/cartSlice'
 
 const user = {
     name: 'Tom Cook',
@@ -21,6 +23,8 @@ function classNames(...classes: string[]) {
 }
 
 const NavBar = ({ children }: { children: React.ReactNode }) => {
+    const productsInCart = useSelector(getaddedCartItems)
+
     return (
         <>
             <div className="min-h-full">
@@ -59,7 +63,7 @@ const NavBar = ({ children }: { children: React.ReactNode }) => {
                                                 <span className="absolute -inset-1.5" />
                                                 <span className="sr-only">View Cart</span>
                                                 <span className="inline-flex items-center ml-4 -mb-1 rounded-md bg-red-50 px-2 py-1 text-xs font-bold text-red-700 ring-1 ring-inset ring-red-600/10">
-                                                    4
+                                                    {productsInCart.length}
                                                 </span>
                                                 <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
                                                 

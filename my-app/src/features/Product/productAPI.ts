@@ -57,7 +57,6 @@ export const fetchAllBrands = async () => {
 export const fetchProductById = async (id: any) => {
   return new Promise(async resolve => {
     const data = await axios.get("http://localhost:8080/products/" + id);
-    console.log("url", "http://localhost:8080/products/" + id)
     resolve(data)
   }
   )

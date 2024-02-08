@@ -15,12 +15,8 @@ const Login = () => {
   } = useForm() as any
 
   const user = useSelector(loggedUser)
-  const error = useSelector(loginError)
-  const dispatch = useDispatch();
-  
-  console.log("errorlogin", error)
 
-  console.log("user hai ki nhi", user)
+  const dispatch = useDispatch();
 
   const onSubmit = (data) => {
     let userdata = {
@@ -29,12 +25,13 @@ const Login = () => {
     }
     dispatch(checkUserAsync(userdata) as any)
   }
-
- 
+  if(user) {
+    return <Navigate to="/"></Navigate>
+  }
 
   return (
     <>
-       {user && <Navigate to="/"></Navigate>}
+       
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm text-center text-3xl text-teal-600 font-bold">
           Khandelwals

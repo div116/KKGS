@@ -1,9 +1,20 @@
+import axios from "axios";
+
 // A mock function to mimic making an async request for data
-export const fetchCount = async () => {
+export const addToCart = async (product) => {
   return new Promise(async resolve => {
-   const response = await fetch("http://localhost:8080");
-   const data = await response.json();
-   resolve(data)
+    const response = await axios.post("http://localhost:8080/cart", product);
+    resolve(response.data);
+  }
+  )
+}
+
+export const getCartItemsByUser = async (userId) => {
+  return new Promise(async resolve => {
+    console.log("userid", userId)
+    const response = await axios.get("http://localhost:8080/cart?user=" + userId);
+    console.log("response cart get", response)
+    resolve(response.data);
   }
   )
 }

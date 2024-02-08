@@ -4,6 +4,8 @@ import { RadioGroup } from '@headlessui/react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchProductByIdAsync, selectedProduct } from '../productSlice'
 import { useParams } from 'react-router-dom'
+import { addToCartAsync, getCartItemsByUserAsync } from '../../Cart/cartSlice'
+import { loggedUser } from '../../Auth/authSlice'
 
 const colors = [
   { name: 'White', class: 'bg-white', selectedClass: 'ring-gray-400' },
@@ -23,11 +25,11 @@ const sizes = [
 ]
 
 const highlights = [
-      'Hand cut and sewn locally',
-      'Dyed with our proprietary colors',
-      'Pre-washed & pre-shrunk',
-      'Ultra-soft 100% cotton',
-    ]
+  'Hand cut and sewn locally',
+  'Dyed with our proprietary colors',
+  'Pre-washed & pre-shrunk',
+  'Ultra-soft 100% cotton',
+]
 
 
 function classNames(...classes: string[]) {
@@ -39,20 +41,31 @@ export default function ProductDetails() {
   const [selectedSize, setSelectedSize] = useState(sizes[2])
 
   const product = useSelector(selectedProduct);
-  console.log("ppppppp", product)
+  const user = useSelector(loggedUser);
   const dispatch = useDispatch();
   const params = useParams();
 
+  const handleCart = (e) => {
+    e.preventDefault()
+    let cartItem = {
+      ...product,
+      quantity: 1,
+      user: user?.id
+    }
+    dispatch(addToCartAsync(cartItem) as any)
+    dispatch(getCartItemsByUserAsync(user.id) as any) 
+  }
+
   useEffect(() => {
     dispatch(fetchProductByIdAsync(params.id) as any)
-  }, [dispatch,params.id])
+  }, [dispatch, params.id])
 
   return (
     <div className="bg-white">
-      { product ?<div className="pt-6">
+      {product ? <div className="pt-6">
         <nav aria-label="Breadcrumb">
           <ol role="list" className="mx-auto flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-            { product?.breadcrumbs?.map((breadcrumb) => (
+            {product?.breadcrumbs?.map((breadcrumb) => (
               <li key={breadcrumb.id}>
                 <div className="flex items-center">
                   <a href={breadcrumb.href} className="mr-2 text-sm font-medium text-gray-900">
@@ -72,7 +85,7 @@ export default function ProductDetails() {
               </li>
             ))}
             <li className="text-sm">
-              <a  aria-current="page" className="font-medium text-gray-500 hover:text-gray-600">
+              <a aria-current="page" className="font-medium text-gray-500 hover:text-gray-600">
                 {product?.title}
               </a>
             </li>
@@ -244,8 +257,9 @@ export default function ProductDetails() {
               </div>
 
               <button
-                type="submit"
+
                 className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-teal-600 px-8 py-3 text-base font-medium text-white hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
+                onClick={handleCart}
               >
                 Add to Cart
               </button>

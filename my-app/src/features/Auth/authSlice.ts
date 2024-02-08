@@ -24,7 +24,6 @@ export const createUserAsync = createAsyncThunk("user/createUser", async (data: 
 export const checkUserAsync = createAsyncThunk("user/checkUser", async (data: { email: string; password: string }) => {
   try {
     const response: any = await loginUser(data)
-    console.log("response", response);
     return response
   } catch (error) {
     throw error = "Invalid Credentials"

@@ -11,7 +11,6 @@ const SignUp = () => {
   } = useForm() as any
 
   const user = useSelector(User)
-  console.log("signed user", user)
   const dispatch = useDispatch();
 
   const onSubmit = (data) => {
@@ -23,8 +22,8 @@ const SignUp = () => {
   }
 
   return (
-        <>
-        {user && <Navigate to="/"></Navigate>}
+    <>
+      {user && <Navigate to="/"></Navigate>}
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm text-center text-3xl text-teal-600 font-bold">
           Khandelwals
@@ -42,13 +41,13 @@ const SignUp = () => {
               <div className="mt-2">
                 <input
                   id="email"
-                 {...register("email", { required: true, pattern: { value: /\S+@\S+\.\S+/, message: "Invalid email address"} })}
-                  
+                  {...register("email", { required: true, pattern: { value: /\S+@\S+\.\S+/, message: "Invalid email address" } })}
+
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
                 />
-                  <p className="text-red-500">{errors?.email?.message}</p>
+                <p className="text-red-500">{errors?.email?.message}</p>
               </div>
-            
+
             </div>
 
             <div>
@@ -60,31 +59,31 @@ const SignUp = () => {
               <div className="mt-2">
                 <input
                   id="password"
-                  {...register("password", { required: true , pattern: { value:  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, message: "Enter a valid password"} })}
+                  {...register("password", { required: true, pattern: { value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, message: "Enter a valid password" } })}
                   type="password"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
                 />
                 <p className="text-red-500">{errors?.password?.message}</p>
               </div>
-              
+
             </div>
 
             <div>
               <div className="flex items-center justify-between">
                 <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
-                 Confirm Password
+                  Confirm Password
                 </label>
               </div>
               <div className="mt-2">
                 <input
                   id="confirm-password"
-                  {...register("confirmPassword", { required: true, validate: (value) => value === watch("password"), pattern: { value:  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, message: "Password Did Not Match"} })}
+                  {...register("confirmPassword", { required: true, validate: (value) => value === watch("password"), pattern: { value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, message: "Password Did Not Match" } })}
                   type="password"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
                 />
                 <p className="text-red-500">{errors?.confirmPassword?.message}</p>
               </div>
-              
+
             </div>
 
             <div>

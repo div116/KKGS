@@ -1,35 +1,57 @@
-import type { PayloadAction } from "@reduxjs/toolkit"
-import { createAppSlice } from "../../app/createAppSlice"
-import type { AppThunk } from "../../app/store"
-import { fetchCount } from "./cartAPI"
+import { createAsyncThunk, createSlice, type PayloadAction } from "@reduxjs/toolkit"
+import { addToCart, getCartItemsByUser } from "./cartAPI"
 
-export interface CounterSliceState {
-  value: number
+export interface CartSliceState {
+  cartItem: any
+  addedCartItems: any
   status: "idle" | "loading" | "failed"
 }
 
-const initialState: CounterSliceState = {
-  value: 0,
+const initialState: CartSliceState = {
+  cartItem: [],
+  addedCartItems: [],
   status: "idle",
 }
 
+export const addToCartAsync = createAsyncThunk("cart/addToCart", async (product: any) => {
+  const response: any = await addToCart(product)
+  return response
+})
 
-export const counterSlice = createAppSlice({
-  name: "counter",
+export const getCartItemsByUserAsync = createAsyncThunk("cart/getCartItems", async (userId :any) => {
+  const response: any = await getCartItemsByUser(userId)
+  return response
+})
+
+export const cartSlice = createSlice({
+  name: "cart",
   initialState,
   reducers: create => ({
     increment: create.reducer(state => {
-      state.value += 1
+      
     })
   }),
-  selectors: {
-    selectCount: counter => counter.value,
-    selectStatus: counter => counter.status,
-  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(addToCartAsync.pending, (state, action) => {
+        state.status = "loading"
+      })
+      .addCase(addToCartAsync.fulfilled, (state, action) => {
+        state.status = "idle"
+        state.cartItem = action.payload
+      })
+      .addCase(getCartItemsByUserAsync.pending, (state, action) => {
+        state.status = "loading"
+      })
+      .addCase(getCartItemsByUserAsync.fulfilled, (state, action) => {
+        state.status = "idle"
+        state.addedCartItems = action.payload
+      })
+  }
 })
 
+export default cartSlice.reducer
 
-export const {increment } = counterSlice.actions
+export const cartItems = (state: any) => state.cart.cartItem
 
-export const { selectCount } = counterSlice.selectors
-
+export const getaddedCartItems = (state: any) => state.cart.addedCartItems
