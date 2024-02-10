@@ -11,10 +11,22 @@ export const addToCart = async (product) => {
 
 export const getCartItemsByUser = async (userId) => {
   return new Promise(async resolve => {
-    console.log("userid", userId)
     const response = await axios.get("http://localhost:8080/cart?user=" + userId);
-    console.log("response cart get", response)
     resolve(response.data);
   }
   )
+}
+
+export const updateCart = async (update) => {
+  return new Promise(async resolve => {
+    const response = await axios.put("http://localhost:8080/cart/"+update.id, update);
+    resolve(response.data);
+  })
+}
+
+export const removeFromCart = async (product) => {
+  return new Promise(async resolve => {
+    const response = await axios.delete("http://localhost:8080/cart/"+product.id);
+    resolve(response.data);
+  })
 }

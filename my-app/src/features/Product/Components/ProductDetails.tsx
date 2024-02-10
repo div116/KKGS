@@ -53,7 +53,6 @@ export default function ProductDetails() {
       user: user?.id
     }
     dispatch(addToCartAsync(cartItem) as any)
-    dispatch(getCartItemsByUserAsync(user.id) as any) 
   }
 
   useEffect(() => {

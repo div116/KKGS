@@ -45,7 +45,7 @@ const App = () => {
     if(user) {
       dispatch((getCartItemsByUserAsync(user.id)) as any)
     }
-  })
+  },[dispatch, user])
 
   return (
     <>

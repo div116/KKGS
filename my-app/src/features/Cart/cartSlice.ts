@@ -1,15 +1,13 @@
 import { createAsyncThunk, createSlice, type PayloadAction } from "@reduxjs/toolkit"
-import { addToCart, getCartItemsByUser } from "./cartAPI"
+import { addToCart, getCartItemsByUser, removeFromCart, updateCart } from "./cartAPI"
 
 export interface CartSliceState {
-  cartItem: any
-  addedCartItems: any
+  cartItems: any
   status: "idle" | "loading" | "failed"
 }
 
 const initialState: CartSliceState = {
-  cartItem: [],
-  addedCartItems: [],
+  cartItems: [],
   status: "idle",
 }
 
@@ -18,8 +16,18 @@ export const addToCartAsync = createAsyncThunk("cart/addToCart", async (product:
   return response
 })
 
-export const getCartItemsByUserAsync = createAsyncThunk("cart/getCartItems", async (userId :any) => {
+export const getCartItemsByUserAsync = createAsyncThunk("cart/getCartItemsByUser", async (userId :any) => {
   const response: any = await getCartItemsByUser(userId)
+  return response
+})
+
+export const updateCartAsync = createAsyncThunk("cart/updateCart", async (update : any) => {
+  const response: any = await updateCart(update)
+  return response
+})
+
+export const removeFromCartAsync = createAsyncThunk("cart/removeFromCart", async (product: any) => {
+  const response: any = await removeFromCart(product)
   return response
 })
 
@@ -38,20 +46,35 @@ export const cartSlice = createSlice({
       })
       .addCase(addToCartAsync.fulfilled, (state, action) => {
         state.status = "idle"
-        state.cartItem = action.payload
+        state.cartItems.push(action.payload) 
       })
       .addCase(getCartItemsByUserAsync.pending, (state, action) => {
         state.status = "loading"
       })
       .addCase(getCartItemsByUserAsync.fulfilled, (state, action) => {
         state.status = "idle"
-        state.addedCartItems = action.payload
+        state.cartItems = action.payload
       })
+      .addCase(updateCartAsync.pending, (state, action) => {
+        state.status = "loading"
+      })
+      .addCase(updateCartAsync.fulfilled, (state, action) => {
+        state.status = "idle"
+        let index = state.cartItems.findIndex((item: any) => item.id === action.payload.id)
+        state.cartItems[index] = action.payload
+      })
+      .addCase(removeFromCartAsync.pending, (state, action) => {
+        state.status = "loading"
+      })
+      .addCase(removeFromCartAsync.fulfilled, (state, action) => {
+        state.status = "idle"
+        let index = state.cartItems.findIndex((item: any) => item.id === action.payload.id)
+        state.cartItems.splice(index, 1)
+      })
+     
   }
 })
 
 export default cartSlice.reducer
 
-export const cartItems = (state: any) => state.cart.cartItem
-
-export const getaddedCartItems = (state: any) => state.cart.addedCartItems
+export const cartItems = (state: any) => state.cart.cartItems
