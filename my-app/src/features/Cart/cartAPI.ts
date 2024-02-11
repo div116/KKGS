@@ -30,3 +30,13 @@ export const removeFromCart = async (product) => {
     resolve(response.data);
   })
 }
+
+export const clearCart = async (userId) => {
+  return new Promise(async resolve => {
+    const items = await getCartItemsByUser(userId);
+    for(let item of items as any) {
+      await removeFromCart(item);
+    }
+    resolve({message: "Cart Cleared"});
+  })
+}

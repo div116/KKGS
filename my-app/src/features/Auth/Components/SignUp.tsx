@@ -16,7 +16,8 @@ const SignUp = () => {
   const onSubmit = (data) => {
     let userdata = {
       email: data.email,
-      password: data.password
+      password: data.password,
+      addresses:[] 
     }
     dispatch(createUserAsync(userdata) as any)
   }
