@@ -2044,14 +2044,14 @@
   ],
   "users": [
     {
-      "id": "1597",
+      "id": "623d",
       "email": "divyanshikhandelwal11600@gmail.com",
       "password": "Itt@123456789",
       "addresses": [
         {
-          "name": "SUSHILA TAMBI",
-          "mobile": "7891676534",
-          "email": "sushila@gmail.com",
+          "name": "Divyanshi Khandelwal",
+          "mobile": "6091236780",
+          "email": "divyanshikhandelwal11600@gmail.com",
           "streetAddress": "5A GOVINDBADI SITARAMBAZAR, BRAHMPURI",
           "city": "JAIPUR",
           "region": "RAJASTHAN",
@@ -2060,40 +2060,19 @@
       ]
     }
   ],
-  "cart": [
-    {
-      "id": "100",
-      "title": "Crystal chandelier maria theresa for 12 light",
-      "description": "Crystal chandelier maria theresa for 12 light",
-      "price": 47,
-      "discountPercentage": 16,
-      "rating": 4.74,
-      "stock": 133,
-      "brand": "YIOSI",
-      "category": "lighting",
-      "thumbnail": "https://cdn.dummyjson.com/product-images/100/thumbnail.jpg",
-      "images": [
-        "https://cdn.dummyjson.com/product-images/100/1.jpg",
-        "https://cdn.dummyjson.com/product-images/100/2.jpg",
-        "https://cdn.dummyjson.com/product-images/100/3.jpg",
-        "https://cdn.dummyjson.com/product-images/100/thumbnail.jpg"
-      ],
-      "quantity": 1,
-      "user": "1597"
-    }
-  ],
+  "cart": [],
   "orders": [
     {
-      "id": "8905",
+      "id": "4aeb",
       "user": {
-        "id": "1597",
+        "id": "623d",
         "email": "divyanshikhandelwal11600@gmail.com",
         "password": "Itt@123456789",
         "addresses": [
           {
-            "name": "SUSHILA TAMBI",
-            "mobile": "7891676534",
-            "email": "sushila@gmail.com",
+            "name": "Divyanshi Khandelwal",
+            "mobile": "6091236780",
+            "email": "divyanshikhandelwal11600@gmail.com",
             "streetAddress": "5A GOVINDBADI SITARAMBAZAR, BRAHMPURI",
             "city": "JAIPUR",
             "region": "RAJASTHAN",
@@ -2103,58 +2082,38 @@
       },
       "products": [
         {
-          "id": "2",
-          "title": "iPhone X",
-          "description": "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
-          "price": 899,
-          "discountPercentage": 17.94,
-          "rating": 4.44,
-          "stock": 34,
-          "brand": "Apple",
-          "category": "smartphones",
-          "thumbnail": "https://cdn.dummyjson.com/product-images/2/thumbnail.jpg",
+          "id": "66",
+          "title": "Steel Analog Couple Watches",
+          "description": "Elegant design, Stylish ,Unique & Trendy,Comfortable wear",
+          "price": 35,
+          "discountPercentage": 3.23,
+          "rating": 4.79,
+          "stock": 24,
+          "brand": "Eastern Watches",
+          "category": "womens-watches",
+          "thumbnail": "https://cdn.dummyjson.com/product-images/66/thumbnail.jpg",
           "images": [
-            "https://cdn.dummyjson.com/product-images/2/1.jpg",
-            "https://cdn.dummyjson.com/product-images/2/2.jpg",
-            "https://cdn.dummyjson.com/product-images/2/3.jpg",
-            "https://cdn.dummyjson.com/product-images/2/thumbnail.jpg"
+            "https://cdn.dummyjson.com/product-images/66/1.jpg",
+            "https://cdn.dummyjson.com/product-images/66/2.jpg",
+            "https://cdn.dummyjson.com/product-images/66/3.jpg",
+            "https://cdn.dummyjson.com/product-images/66/4.JPG",
+            "https://cdn.dummyjson.com/product-images/66/thumbnail.jpg"
           ],
           "quantity": 1,
-          "user": "1597"
-        },
-        {
-          "id": "16",
-          "title": "Hyaluronic Acid Serum",
-          "description": "L'OrÃ©al Paris introduces Hyaluron Expert Replumping Serum formulated with 1.5% Hyaluronic Acid",
-          "price": 19,
-          "discountPercentage": 13.31,
-          "rating": 4.83,
-          "stock": 110,
-          "brand": "L'Oreal Paris",
-          "category": "skincare",
-          "thumbnail": "https://cdn.dummyjson.com/product-images/16/thumbnail.jpg",
-          "images": [
-            "https://cdn.dummyjson.com/product-images/16/1.png",
-            "https://cdn.dummyjson.com/product-images/16/2.webp",
-            "https://cdn.dummyjson.com/product-images/16/3.jpg",
-            "https://cdn.dummyjson.com/product-images/16/4.jpg",
-            "https://cdn.dummyjson.com/product-images/16/thumbnail.jpg"
-          ],
-          "quantity": 1,
-          "user": "1597"
+          "user": "623d"
         }
       ],
       "selectedAddress": {
-        "name": "SUSHILA TAMBI",
-        "mobile": "7891676534",
-        "email": "sushila@gmail.com",
+        "name": "Divyanshi Khandelwal",
+        "mobile": "6091236780",
+        "email": "divyanshikhandelwal11600@gmail.com",
         "streetAddress": "5A GOVINDBADI SITARAMBAZAR, BRAHMPURI",
         "city": "JAIPUR",
         "region": "RAJASTHAN",
         "postalCode": "302002"
       },
       "paymentMethod": "cash",
-      "totalPrice": 918
+      "totalPrice": 35
     }
   ]
 }

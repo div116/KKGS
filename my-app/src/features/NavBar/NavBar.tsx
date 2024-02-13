@@ -13,9 +13,9 @@ const user = {
 }
 
 const userNavigation = [
-    { name: 'Your Profile', href: '#' },
-    { name: 'Settings', href: '#' },
-    { name: 'Sign out', href: '#' },
+    { name: 'Your Profile', location: '/user-profile' },
+    { name: 'Sign out', location: '/login' },
+    {name: 'Your Orders', location: '/orders'}
 ]
 
 function classNames(...classes: string[]) {
@@ -91,15 +91,15 @@ const NavBar = ({ children }: { children: React.ReactNode }) => {
                                                         {userNavigation.map((item) => (
                                                             <Menu.Item key={item.name}>
                                                                 {({ active }) => (
-                                                                    <a
-                                                                        href={item.href}
+                                                                    <Link
+                                                                        to={item.location}
                                                                         className={classNames(
                                                                             active ? 'bg-gray-100' : '',
                                                                             'block px-4 py-2 text-sm text-gray-700'
                                                                         )}
                                                                     >
                                                                         {item.name}
-                                                                    </a>
+                                                                    </Link>
                                                                 )}
                                                             </Menu.Item>
                                                         ))}
@@ -136,7 +136,6 @@ const NavBar = ({ children }: { children: React.ReactNode }) => {
                                         <button className="bg-teal-600 text-white px-4 py-2 rounded">Search</button>
                                     </div>
 
-
                                 </div>
                                 <div className="border-t border-gray-700 pb-3 pt-4">
                                     <div className="flex items-center px-5">
@@ -165,7 +164,7 @@ const NavBar = ({ children }: { children: React.ReactNode }) => {
                                             <Disclosure.Button
                                                 key={item.name}
                                                 as="a"
-                                                href={item.href}
+                                                href={item.location}
                                                 className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
                                             >
                                                 {item.name}
@@ -180,7 +179,7 @@ const NavBar = ({ children }: { children: React.ReactNode }) => {
 
                 <header className="bg-white shadow">
                     <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-                        <h1 className="text-3xl font-bold tracking-tight text-gray-900">Dashboard</h1>
+                        <h1 className="text-3xl font-bold tracking-tight text-gray-900">E-Commerce</h1>
                     </div>
                 </header>
                 <main>

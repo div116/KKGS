@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { clearCartAsync } from '../features/Cart/cartSlice'
 import { loggedUser } from '../features/Auth/authSlice'
-import { clearCurrentOrder } from '../features/Orders/counter/orderSlice'
+import { clearCurrentOrder } from '../features/Orders/Orders/orderSlice'
 
 const OrderSuccessPage = () => {
   const params = useParams()

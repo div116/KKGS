@@ -8,7 +8,7 @@ const Cart = () => {
   const [open, setOpen] = useState(true)
   const products = useSelector(cartItems);
   const totalPrice = products.reduce((total, product) => total + product.price * product.quantity, 0)
-  const totalItemsInCart = products.reduce((total, product) => total + parseInt(product.quantity),0)
+  const totalItemsInCart = products.reduce((total, product) => total + parseInt(product.quantity), 0)
 
   const handleQuantity = (e, product) => {
     dispatch(updateCartAsync({ ...product, quantity: e.target.value }) as any)
@@ -89,12 +89,20 @@ const Cart = () => {
           </div>
           <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
           <div className="mt-6">
-            <Link
-              to="/checkout"
-              className="flex items-center justify-center rounded-md border border-transparent bg-teal-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-teal-700"
-            >
-              Checkout
-            </Link>
+            {products.length > 0 ? (
+              <Link
+                to="/checkout"
+                className="flex items-center justify-center rounded-md border border-transparent bg-teal-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-teal-700"
+              >
+                Checkout
+              </Link>
+            ) : (
+              <button
+                className=" w-full flex items-center justify-center rounded-md border border-transparent bg-gray-300 px-6 py-3 text-base font-medium text-gray-500 shadow-sm cursor-not-allowed"
+                disabled >
+                Checkout
+              </button>
+            )}
           </div>
           <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
             <p>

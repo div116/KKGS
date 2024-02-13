@@ -1,7 +1,7 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom"
-import Home from "./pages/Home"
-import LoginPage from "./pages/LoginPage"
-import SignUpPage from "./pages/SignUpPage"
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import Home from "./pages/Home";
+import LoginPage from "./pages/LoginPage";
+import SignUpPage from "./pages/SignUpPage";
 import CartPage from "./pages/CartPage";
 import CheckOut from "./pages/CheckOut";
 import ProductDetailsPage from "./pages/ProductDetailsPage";
@@ -12,6 +12,9 @@ import { getCartItemsByUserAsync } from "./features/Cart/cartSlice";
 import { loggedUser } from "./features/Auth/authSlice";
 import PageNotFound from "./pages/PageNotFound";
 import OrderSuccessPage from "./pages/OrderSuccessPage";
+import UserOrdersPage from "./pages/UserOrdersPage";
+import UserProfilepage from "./pages/UserProfilepage";
+import { loggedInUserInfoAsync } from "./features/user/userSlice";
 
 const router = createBrowserRouter([
   {
@@ -45,6 +48,14 @@ const router = createBrowserRouter([
   {
     path: "/order-success/:id",
     element: <Protected><OrderSuccessPage></OrderSuccessPage></Protected>
+  },
+  {
+    path: "/orders",
+    element: <Protected><UserOrdersPage></UserOrdersPage></Protected>
+  },
+  {
+    path: "/user-profile",
+    element: <Protected><UserProfilepage></UserProfilepage></Protected>
   }
 ]);
 
@@ -54,6 +65,7 @@ const App = () => {
   useEffect(() => {
     if(user) {
       dispatch((getCartItemsByUserAsync(user.id)) as any)
+      dispatch((loggedInUserInfoAsync(user.id)) as any)
     }
   },[dispatch, user])
 
