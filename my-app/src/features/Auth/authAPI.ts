@@ -23,9 +23,3 @@ export const createUser = async (data) => {
       });
   }
 
-  export const updateUser = async(user) => {
-    return new Promise(async resolve => {
-      const response = await axios.put("http://localhost:8080/users/"+user.id, user);
-      resolve(response.data);
-      });
-  }

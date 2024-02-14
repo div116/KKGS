@@ -2049,9 +2049,18 @@
       "password": "Itt@123456789",
       "addresses": [
         {
-          "name": "Divyanshi Khandelwal",
+          "name": "SUSHILA TAMBI",
           "mobile": "6091236780",
           "email": "divyanshikhandelwal11600@gmail.com",
+          "streetAddress": "5A GOVINDBADI SITARAMBAZAR, BRAHMPURI",
+          "city": "JAIPUR",
+          "region": "RAJASTHAN",
+          "postalCode": "302002"
+        },
+        {
+          "name": "Divyanshi Tambi",
+          "mobile": "7891676534",
+          "email": "sushila@gmail.com",
           "streetAddress": "5A GOVINDBADI SITARAMBAZAR, BRAHMPURI",
           "city": "JAIPUR",
           "region": "RAJASTHAN",
@@ -2060,7 +2069,30 @@
       ]
     }
   ],
-  "cart": [],
+  "cart": [
+    {
+      "id": "56",
+      "title": "Sneakers Joggers Shoes",
+      "description": "Gender: Men , Colors: Same as DisplayedCondition: 100% Brand New",
+      "price": 40,
+      "discountPercentage": 12.57,
+      "rating": 4.38,
+      "stock": 6,
+      "brand": "Sneakers",
+      "category": "mens-shoes",
+      "thumbnail": "https://cdn.dummyjson.com/product-images/56/thumbnail.jpg",
+      "images": [
+        "https://cdn.dummyjson.com/product-images/56/1.jpg",
+        "https://cdn.dummyjson.com/product-images/56/2.jpg",
+        "https://cdn.dummyjson.com/product-images/56/3.jpg",
+        "https://cdn.dummyjson.com/product-images/56/4.jpg",
+        "https://cdn.dummyjson.com/product-images/56/5.jpg",
+        "https://cdn.dummyjson.com/product-images/56/thumbnail.jpg"
+      ],
+      "quantity": 1,
+      "user": "623d"
+    }
+  ],
   "orders": [
     {
       "id": "4aeb",

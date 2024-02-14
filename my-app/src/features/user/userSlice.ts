@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { getLoggedInUserinfo, getuserOrdersInfo } from "./userAPI"
+import { getLoggedInUserinfo, getuserOrdersInfo, updateUser } from "./userAPI"
 
 export interface UserSliceState {
   userInfo: any,
@@ -20,6 +20,11 @@ export const loggedInUserInfoAsync = createAsyncThunk("user/loggedInUserInfo", a
 
 export const userOrdersInfoAsync = createAsyncThunk("user/userOrdersInfo", async (userId: any) => {
   const response = await getuserOrdersInfo(userId);
+  return response
+})
+
+export const updateUserAsync = createAsyncThunk("user/addUserAddress", async (userData: any) => {
+  const response: any = await updateUser(userData)
   return response
 })
 
@@ -48,11 +53,18 @@ export const userSlice = createSlice({
         state.status = "idle"
         state.orderInfo = action.payload
       })
+      .addCase(updateUserAsync.pending, (state, action) => {
+        state.status = "loading"
+      })
+      .addCase(updateUserAsync.fulfilled, (state, action) => {
+        state.status = "idle"
+        state.userInfo = action.payload
+      })
   }
 })
 
 export default userSlice.reducer;
 
-export const loggedInUserinfo = (state: any) => state.user.userInfo;
+export const UserInfo = (state: any) => state.user.userInfo;
 
 export const userOrdersInfo = (state: any) => state.user.orderInfo;

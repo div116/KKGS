@@ -1,4 +1,4 @@
-import { Children, Fragment } from 'react'
+import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, ShoppingCartIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Link } from 'react-router-dom'
@@ -15,7 +15,7 @@ const user = {
 const userNavigation = [
     { name: 'Your Profile', location: '/user-profile' },
     { name: 'Sign out', location: '/login' },
-    {name: 'Your Orders', location: '/orders'}
+    { name: 'Your Orders', location: '/orders' }
 ]
 
 function classNames(...classes: string[]) {
@@ -36,7 +36,7 @@ const NavBar = ({ children }: { children: React.ReactNode }) => {
                                     <div className="flex items-center">
                                         <div className="flex-shrink-0 text-white text-4xl font-bold ">
                                             <Link to="/">
-                                            Khandelwals
+                                                Khandelwals
                                             </Link>
                                         </div>
                                         <div className="hidden md:block">
@@ -49,8 +49,6 @@ const NavBar = ({ children }: { children: React.ReactNode }) => {
                                                     />
                                                     <button className="bg-teal-600 text-white px-4 py-2 rounded">Search</button>
                                                 </div>
-
-
                                             </div>
                                         </div>
                                     </div>
@@ -66,7 +64,7 @@ const NavBar = ({ children }: { children: React.ReactNode }) => {
                                                     {productsInCart?.length}
                                                 </span>
                                                 <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
-                                                
+
                                             </Link>
 
                                             {/* Profile dropdown */}
@@ -156,7 +154,7 @@ const NavBar = ({ children }: { children: React.ReactNode }) => {
                                                 4
                                             </span>
                                             <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
-                                           
+
                                         </Link>
                                     </div>
                                     <div className="mt-3 space-y-1 px-2">

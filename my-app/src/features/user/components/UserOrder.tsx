@@ -1,11 +1,11 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { userOrdersInfo, userOrdersInfoAsync } from '../userSlice'
-import { loggedUser } from '../../Auth/authSlice';
+import { UserInfo } from '../userSlice'
 
 const UserOrder = () => {
     const dispatch = useDispatch();
-    const loggedInUser = useSelector(loggedUser)
+    const loggedInUser = useSelector(UserInfo)
 
     useEffect(() => {
         dispatch((userOrdersInfoAsync(loggedInUser.id)) as any);
