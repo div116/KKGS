@@ -23,3 +23,10 @@ export const createUser = async (data) => {
       });
   }
 
+  export const signOutUser = async () => {
+    return new Promise(async resolve => {
+      // const response = await axios.get("http://localhost:8080/logout");
+      resolve({data: "Successfully logged Out"});
+      });
+  }
+

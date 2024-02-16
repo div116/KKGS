@@ -14,7 +14,7 @@ const user = {
 
 const userNavigation = [
     { name: 'Your Profile', location: '/user-profile' },
-    { name: 'Sign out', location: '/login' },
+    { name: 'Sign out', location: '/log-out' },
     { name: 'Your Orders', location: '/orders' }
 ]
 

@@ -2049,19 +2049,28 @@
       "password": "Itt@123456789",
       "addresses": [
         {
-          "name": "SUSHILA TAMBI",
-          "mobile": "6091236780",
+          "name": "Divyanshi Khandelwal",
           "email": "divyanshikhandelwal11600@gmail.com",
-          "streetAddress": "5A GOVINDBADI SITARAMBAZAR, BRAHMPURI",
           "city": "JAIPUR",
           "region": "RAJASTHAN",
-          "postalCode": "302002"
+          "postalCode": "302002",
+          "mobile": "6091236780",
+          "streetAddress": "5A GOVINDBADI SITARAMBAZAR, BRAHMPURI"
         },
         {
-          "name": "Divyanshi Tambi",
+          "name": "Sushila Tambi",
+          "email": "sushilaTambi@gmail.com",
+          "city": "JAIPUR",
+          "region": "RAJASTHAN",
+          "postalCode": "302002",
           "mobile": "7891676534",
-          "email": "sushila@gmail.com",
-          "streetAddress": "5A GOVINDBADI SITARAMBAZAR, BRAHMPURI",
+          "streetAddress": "5A GOVINDBADI SITARAMBAZAR, BRAHMPURI"
+        },
+        {
+          "name": "Disha Khandelwal",
+          "email": "disha@gmail.com",
+          "phone": "234567891",
+          "streetAddress": "5A GOVINDBADI SITARAMBAZAR",
           "city": "JAIPUR",
           "region": "RAJASTHAN",
           "postalCode": "302002"
@@ -2071,23 +2080,21 @@
   ],
   "cart": [
     {
-      "id": "56",
-      "title": "Sneakers Joggers Shoes",
-      "description": "Gender: Men , Colors: Same as DisplayedCondition: 100% Brand New",
-      "price": 40,
-      "discountPercentage": 12.57,
-      "rating": 4.38,
-      "stock": 6,
-      "brand": "Sneakers",
-      "category": "mens-shoes",
-      "thumbnail": "https://cdn.dummyjson.com/product-images/56/thumbnail.jpg",
+      "id": "6",
+      "title": "MacBook Pro",
+      "description": "MacBook Pro 2021 with mini-LED display may launch between September, November",
+      "price": 1749,
+      "discountPercentage": 11.02,
+      "rating": 4.57,
+      "stock": 83,
+      "brand": "Apple",
+      "category": "laptops",
+      "thumbnail": "https://cdn.dummyjson.com/product-images/6/thumbnail.png",
       "images": [
-        "https://cdn.dummyjson.com/product-images/56/1.jpg",
-        "https://cdn.dummyjson.com/product-images/56/2.jpg",
-        "https://cdn.dummyjson.com/product-images/56/3.jpg",
-        "https://cdn.dummyjson.com/product-images/56/4.jpg",
-        "https://cdn.dummyjson.com/product-images/56/5.jpg",
-        "https://cdn.dummyjson.com/product-images/56/thumbnail.jpg"
+        "https://cdn.dummyjson.com/product-images/6/1.png",
+        "https://cdn.dummyjson.com/product-images/6/2.jpg",
+        "https://cdn.dummyjson.com/product-images/6/3.png",
+        "https://cdn.dummyjson.com/product-images/6/4.jpg"
       ],
       "quantity": 1,
       "user": "623d"
@@ -2095,7 +2102,7 @@
   ],
   "orders": [
     {
-      "id": "4aeb",
+      "id": "83f5",
       "user": {
         "id": "623d",
         "email": "divyanshikhandelwal11600@gmail.com",
@@ -2114,38 +2121,28 @@
       },
       "products": [
         {
-          "id": "66",
-          "title": "Steel Analog Couple Watches",
-          "description": "Elegant design, Stylish ,Unique & Trendy,Comfortable wear",
-          "price": 35,
-          "discountPercentage": 3.23,
-          "rating": 4.79,
-          "stock": 24,
-          "brand": "Eastern Watches",
-          "category": "womens-watches",
-          "thumbnail": "https://cdn.dummyjson.com/product-images/66/thumbnail.jpg",
+          "id": "2",
+          "title": "iPhone X",
+          "description": "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
+          "price": 899,
+          "discountPercentage": 17.94,
+          "rating": 4.44,
+          "stock": 34,
+          "brand": "Apple",
+          "category": "smartphones",
+          "thumbnail": "https://cdn.dummyjson.com/product-images/2/thumbnail.jpg",
           "images": [
-            "https://cdn.dummyjson.com/product-images/66/1.jpg",
-            "https://cdn.dummyjson.com/product-images/66/2.jpg",
-            "https://cdn.dummyjson.com/product-images/66/3.jpg",
-            "https://cdn.dummyjson.com/product-images/66/4.JPG",
-            "https://cdn.dummyjson.com/product-images/66/thumbnail.jpg"
+            "https://cdn.dummyjson.com/product-images/2/1.jpg",
+            "https://cdn.dummyjson.com/product-images/2/2.jpg",
+            "https://cdn.dummyjson.com/product-images/2/3.jpg",
+            "https://cdn.dummyjson.com/product-images/2/thumbnail.jpg"
           ],
           "quantity": 1,
           "user": "623d"
         }
       ],
-      "selectedAddress": {
-        "name": "Divyanshi Khandelwal",
-        "mobile": "6091236780",
-        "email": "divyanshikhandelwal11600@gmail.com",
-        "streetAddress": "5A GOVINDBADI SITARAMBAZAR, BRAHMPURI",
-        "city": "JAIPUR",
-        "region": "RAJASTHAN",
-        "postalCode": "302002"
-      },
       "paymentMethod": "cash",
-      "totalPrice": 35
+      "totalPrice": 899
     }
   ]
 }
