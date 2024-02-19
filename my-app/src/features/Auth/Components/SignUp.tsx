@@ -17,7 +17,8 @@ const SignUp = () => {
     let userdata = {
       email: data.email,
       password: data.password,
-      addresses:[] 
+      addresses:[],
+      role: "user" 
     }
     dispatch(createUserAsync(userdata) as any)
   }

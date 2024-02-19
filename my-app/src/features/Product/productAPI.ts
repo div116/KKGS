@@ -61,3 +61,21 @@ export const fetchProductById = async (id: any) => {
   }
   )
 }
+
+export const addproduct = async (product: any) => {
+  return new Promise(async resolve => {
+    const data = await axios.post("http://localhost:8080/products", product);
+    resolve(data);
+  }
+  )
+}
+
+export const updateProduct = async (product: any, id) => {
+  return new Promise(async resolve => {
+    console.log("product api", product)
+    const data = await axios.put("http://localhost:8080/products/"+id, product);
+    console.log("delete product", data)
+    resolve(data);
+  }
+  )
+}

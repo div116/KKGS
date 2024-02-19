@@ -63,6 +63,9 @@ const UserProfile = () => {
           <h3 className="text-xl my-5 font-bold tracking-tight ">
             email address : {userInfo.email}
           </h3>
+         {userInfo.role === "admin" && <h3 className="text-xl my-5 font-bold tracking-tight ">
+            role : {userInfo.role}
+          </h3> }
         </div>
 
         <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
