@@ -41,7 +41,7 @@ const CheckOut = () => {
     }
 
     const handleOrder = () => {
-        let orderInfo = { user, products, selectedAddress, paymentMethod, totalPrice }
+        let orderInfo = { user, products, selectedAddress, paymentMethod, totalPrice, status : "pending" }
         dispatch(placeOrderAsync(orderInfo) as any)
     }
 

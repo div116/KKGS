@@ -7,7 +7,8 @@ import { cartItems } from '../Cart/cartSlice'
 import { loggedUser } from '../Auth/authSlice'
 
 const adminNavigation = [
-    { name: 'Admin',location: '/admin'}
+    { name: 'Admin',location: '/admin'},,
+    { name: 'Orders', location: '/admin/orders' },
 ]
    
 
@@ -48,9 +49,10 @@ const NavBar = ({ children }: { children: React.ReactNode }) => {
                                                         className="px-4 py-2 mr-2 border border-gray-300 rounded focus:outline-none focus:border-teal-700"
                                                     />
                                                     <button className="bg-teal-600 text-white px-4 py-2 rounded">Search</button>
-                                                    <div className="ml-4 flex items-center md:ml-6 text-white text-2xl font-bold">
+                                                    <div className="ml-4 flex items-center text-white  ">
                                                     {user?.role==="admin" && adminNavigation.map((item) => (
-                                                        <Link to={item.location}>{item.name}</Link>
+                                                        <Link to={item.location} 
+                                                        className='rounded-md px-3 py-2 text-xl font-medium'>{item.name}</Link>
                                                     ))}
                                                     </div>
                                                 </div>

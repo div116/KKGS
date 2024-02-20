@@ -21,6 +21,7 @@ import ProtectedAdmin from "./features/Auth/Components/ProtectedAdmin";
 import AdminHomepage from "./pages/AdminPages/AdminHomepage";
 import AdminProductDetailsPage from "./pages/AdminPages/AdminProductDetailsPage";
 import AdminProductFormPage from "./pages/AdminPages/AdminProductFormPage";
+import AdminOrdersPage from "./pages/AdminPages/AdminOrdersPage";
 
 const router = createBrowserRouter([
   {
@@ -86,18 +87,23 @@ const router = createBrowserRouter([
   {
     path: "/admin/product-form/edit/:id",
     element: <ProtectedAdmin> <AdminProductFormPage></AdminProductFormPage></ProtectedAdmin>
-  }
+  },
+  {
+    path: "/admin/orders",
+    element: <ProtectedAdmin> <AdminOrdersPage></AdminOrdersPage></ProtectedAdmin>
+  },
+
 ]);
 
 const App = () => {
   const dispatch = useDispatch();
   const user = useSelector(loggedUser)
   useEffect(() => {
-    if(user) {
+    if (user) {
       dispatch((getCartItemsByUserAsync(user.id)) as any)
       dispatch((loggedInUserInfoAsync(user.id)) as any)
     }
-  },[dispatch, user])
+  }, [dispatch, user])
 
   return (
     <>

@@ -2086,43 +2086,58 @@
       "password": "Div@1662220",
       "addresses": [],
       "role": "admin"
-    }
-  ],
-  "cart": [
+    },
     {
-      "id": "6",
-      "title": "MacBook Pro",
-      "description": "MacBook Pro 2021 with mini-LED display may launch between September, November",
-      "price": 1749,
-      "discountPercentage": 11.02,
-      "rating": 4.57,
-      "stock": 83,
-      "brand": "Apple",
-      "category": "laptops",
-      "thumbnail": "https://cdn.dummyjson.com/product-images/6/thumbnail.png",
-      "images": [
-        "https://cdn.dummyjson.com/product-images/6/1.png",
-        "https://cdn.dummyjson.com/product-images/6/2.jpg",
-        "https://cdn.dummyjson.com/product-images/6/3.png",
-        "https://cdn.dummyjson.com/product-images/6/4.jpg"
+      "id": "2b39",
+      "email": "singhamniya@gmail.com",
+      "password": "Itt@123456789",
+      "addresses": [
+        {
+          "name": "Niya Singham",
+          "mobile": "6091236780",
+          "email": "singhamniya@gmail.com",
+          "streetAddress": "5A GOVINDBADI SITARAMBAZAR, BRAHMPURI",
+          "city": "JAIPUR",
+          "region": "RAJASTHAN",
+          "postalCode": "302002"
+        }
       ],
-      "quantity": 1,
-      "user": "623d"
+      "role": "user"
     }
   ],
+  "cart": [],
   "orders": [
     {
-      "id": "83f5",
+      "id": "f7e8",
       "user": {
         "id": "623d",
         "email": "divyanshikhandelwal11600@gmail.com",
         "password": "Itt@123456789",
+        "role": "user",
         "addresses": [
           {
             "name": "Divyanshi Khandelwal",
-            "mobile": "6091236780",
             "email": "divyanshikhandelwal11600@gmail.com",
-            "streetAddress": "5A GOVINDBADI SITARAMBAZAR, BRAHMPURI",
+            "city": "JAIPUR",
+            "region": "RAJASTHAN",
+            "postalCode": "302002",
+            "mobile": "6091236780",
+            "streetAddress": "5A GOVINDBADI SITARAMBAZAR, BRAHMPURI"
+          },
+          {
+            "name": "Sushila Tambi",
+            "email": "sushilaTambi@gmail.com",
+            "city": "JAIPUR",
+            "region": "RAJASTHAN",
+            "postalCode": "302002",
+            "mobile": "7891676534",
+            "streetAddress": "5A GOVINDBADI SITARAMBAZAR, BRAHMPURI"
+          },
+          {
+            "name": "Disha Khandelwal",
+            "email": "disha@gmail.com",
+            "phone": "234567891",
+            "streetAddress": "5A GOVINDBADI SITARAMBAZAR",
             "city": "JAIPUR",
             "region": "RAJASTHAN",
             "postalCode": "302002"
@@ -2131,28 +2146,93 @@
       },
       "products": [
         {
-          "id": "2",
-          "title": "iPhone X",
-          "description": "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
-          "price": 899,
-          "discountPercentage": 17.94,
-          "rating": 4.44,
-          "stock": 34,
-          "brand": "Apple",
-          "category": "smartphones",
-          "thumbnail": "https://cdn.dummyjson.com/product-images/2/thumbnail.jpg",
+          "id": "26",
+          "title": "Plant Hanger For Home",
+          "description": "Boho Decor Plant Hanger For Home Wall Decoration Macrame Wall Hanging Shelf",
+          "price": 41,
+          "discountPercentage": 17.86,
+          "rating": 4.08,
+          "stock": 131,
+          "brand": "Boho Decor",
+          "category": "home-decoration",
+          "thumbnail": "https://cdn.dummyjson.com/product-images/26/thumbnail.jpg",
           "images": [
-            "https://cdn.dummyjson.com/product-images/2/1.jpg",
-            "https://cdn.dummyjson.com/product-images/2/2.jpg",
-            "https://cdn.dummyjson.com/product-images/2/3.jpg",
-            "https://cdn.dummyjson.com/product-images/2/thumbnail.jpg"
+            "https://cdn.dummyjson.com/product-images/26/1.jpg",
+            "https://cdn.dummyjson.com/product-images/26/2.jpg",
+            "https://cdn.dummyjson.com/product-images/26/3.jpg",
+            "https://cdn.dummyjson.com/product-images/26/4.jpg",
+            "https://cdn.dummyjson.com/product-images/26/5.jpg",
+            "https://cdn.dummyjson.com/product-images/26/thumbnail.jpg"
           ],
           "quantity": 1,
           "user": "623d"
         }
       ],
+      "selectedAddress": {
+        "name": "Divyanshi Khandelwal",
+        "email": "divyanshikhandelwal11600@gmail.com",
+        "city": "JAIPUR",
+        "region": "RAJASTHAN",
+        "postalCode": "302002",
+        "mobile": "6091236780",
+        "streetAddress": "5A GOVINDBADI SITARAMBAZAR, BRAHMPURI"
+      },
       "paymentMethod": "cash",
-      "totalPrice": 899
+      "totalPrice": 41,
+      "status": "delivered"
+    },
+    {
+      "id": "3f13",
+      "user": {
+        "id": "2b39",
+        "email": "singhamniya@gmail.com",
+        "password": "Itt@123456789",
+        "addresses": [
+          {
+            "name": "Niya Singham",
+            "mobile": "6091236780",
+            "email": "singhamniya@gmail.com",
+            "streetAddress": "5A GOVINDBADI SITARAMBAZAR, BRAHMPURI",
+            "city": "JAIPUR",
+            "region": "RAJASTHAN",
+            "postalCode": "302002"
+          }
+        ],
+        "role": "user"
+      },
+      "products": [
+        {
+          "id": "76",
+          "title": "Silver Ring Set Women",
+          "description": "Jewelry Type:RingsCertificate Type:NonePlating:Silver PlatedShapeattern:noneStyle:CLASSICReligious",
+          "price": 70,
+          "discountPercentage": 13.57,
+          "rating": 4.61,
+          "stock": 51,
+          "brand": "Darojay",
+          "category": "womens-jewellery",
+          "thumbnail": "https://cdn.dummyjson.com/product-images/76/thumbnail.jpg",
+          "images": [
+            "https://cdn.dummyjson.com/product-images/76/1.jpg",
+            "https://cdn.dummyjson.com/product-images/76/2.jpg",
+            "https://cdn.dummyjson.com/product-images/76/thumbnail.jpg"
+          ],
+          "quantity": 1,
+          "user": "2b39"
+        }
+      ],
+      "selectedAddress": {
+        "name": "Niya Singham",
+        "mobile": "6091236780",
+        "email": "singhamniya@gmail.com",
+        "streetAddress": "5A GOVINDBADI SITARAMBAZAR, BRAHMPURI",
+        "city": "JAIPUR",
+        "region": "RAJASTHAN",
+        "postalCode": "302002"
+      },
+      "paymentMethod": "cash",
+      "totalPrice": 70,
+      "status": "pending"
     }
   ]
 }
