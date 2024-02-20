@@ -410,7 +410,9 @@ const ProductGrid = ({ products }: { products: any }) => {
 
                     </div>
                   </div>
-                  <div> {product?.deleted && <p className="text-sm font-medium text-red-500">Product Deleted</p>}</div>
+                  <div> {product?.deleted && <p className="text-sm font-medium text-red-500">Product Deleted</p>}
+                    {product?.stock <= 0 && <p className="text-sm font-medium text-red-500">Out of Stock</p>}
+                  </div>
                 </Link>
                 <div className="mt-2 flex justify-end">
                   <Link to={`/admin/product-form/edit/${product.id}`} className="flex w-full justify-center rounded-md bg-teal-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-smhover:text-teal-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600">

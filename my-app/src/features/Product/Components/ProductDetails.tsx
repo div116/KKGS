@@ -4,7 +4,7 @@ import { RadioGroup } from '@headlessui/react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchProductByIdAsync, selectedProduct } from '../productSlice'
 import { useParams } from 'react-router-dom'
-import { addToCartAsync, getCartItemsByUserAsync } from '../../Cart/cartSlice'
+import { addToCartAsync, cartItems, getCartItemsByUserAsync } from '../../Cart/cartSlice'
 import { loggedUser } from '../../Auth/authSlice'
 
 const colors = [
@@ -42,17 +42,22 @@ export default function ProductDetails() {
 
   const product = useSelector(selectedProduct);
   const user = useSelector(loggedUser);
+  const cart = useSelector(cartItems)
   const dispatch = useDispatch();
   const params = useParams();
 
   const handleCart = (e) => {
     e.preventDefault()
-    let cartItem = {
-      ...product,
-      quantity: 1,
-      user: user?.id
+    if(cart.findIndex(cartItem => cartItem.id === product.id) < 0) {
+      let cartItem = {
+        ...product,
+        quantity: 1,
+        user: user?.id
+      }
+      dispatch(addToCartAsync(cartItem) as any)
+    } else {
+      console.log("Item is already in the cart")
     }
-    dispatch(addToCartAsync(cartItem) as any)
   }
 
   useEffect(() => {

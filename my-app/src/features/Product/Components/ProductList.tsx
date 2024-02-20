@@ -404,7 +404,10 @@ const ProductGrid = ({ products }: { products: any }) => {
                   </div>
                 </div>
               </Link>
-               <div> {product?.deleted && <p className="text-sm font-medium text-red-500">Product Deleted</p>}</div>
+               <div> 
+                {product?.deleted && <p className="text-sm font-medium text-red-500">Product Deleted</p>}
+                {product?.stock <= 0 && <p className="text-sm font-medium text-red-500">Out of Stock</p>}
+                </div>
                </div>
             ))}
 
