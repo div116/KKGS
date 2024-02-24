@@ -1880,7 +1880,8 @@
       "id": "3740"
     }
   ],
-  "brands": [
+  "brands":
+   [
     {
       "value": "Apple",
       "label": "Apple",
