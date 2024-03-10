@@ -12,6 +12,8 @@ app.use('/products', require('./routes/Product'));
 app.use('/categories', require('./routes/Categories'));
 app.use('/brands', require('./routes/Brands'));
 app.use('/cart', require('./routes/Cart'));
+app.use('/users', require('./routes/User'));
+app.use('/auth', require('./routes/Auth'));
 
 
 app.listen(port, () => {

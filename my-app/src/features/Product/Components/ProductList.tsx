@@ -71,7 +71,6 @@ export const ProductList = () => {
 
   const handleFilterChange = (event: any, id: string, value: string) => {
     const newFilter = { ...filter };
-    // TODO : on server it will support multiple categories
     if (event.target.checked) {
       if (newFilter[id]) {
         newFilter[id].push(value)
@@ -98,7 +97,7 @@ export const ProductList = () => {
   useEffect(() => {
     let pagination = {
       _page: page,
-      _per_page: Items_Per_Page
+      _limit: Items_Per_Page
     }
     dispatch(fetchAllProductsByFilterAsync({ filter, sort, pagination }) as any)
   }, [dispatch, filter, sort, page])

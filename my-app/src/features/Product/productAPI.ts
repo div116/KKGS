@@ -1,6 +1,5 @@
 import axios from "axios";
 
-// A mock function to mimic making an async request for data
 export const fetchAllProducts = async () => {
   return new Promise(async resolve => {
     const data = await axios.get("http://localhost:8080/products");
@@ -9,10 +8,7 @@ export const fetchAllProducts = async () => {
   )
 }
 
-// write the function when multiple filter is selected to modify query
 export const fetchAllProductsByFilter = async (filter: any, sort: any, pagination: any) => {
-  // filters = {category: ["smartphones", "laptops"]}
-  //sort = {_sort: "price", _order: "asc"}
   let queryString = '';
   for (let key in filter) {
     const categoryValues = filter[key];
@@ -32,10 +28,13 @@ export const fetchAllProductsByFilter = async (filter: any, sort: any, paginatio
   }
 
   return new Promise(async resolve => {
-    const data : any= await axios.get("http://localhost:8080/products?" + queryString);
-    resolve({products: data.data.data, totalItems: data.data.items})
+    const response: any = await axios.get("http://localhost:8080/products?" + queryString);
+    const totalItems = response.headers['X-Total-Count'];
+    //provided static value for totalItems as i am facing difficulty to read the value of header x-total-count as it is getting filtered out in reponse
+    resolve({ products: response.data, totalItems: 99 })
   }
   )
+
 }
 
 export const fetchAllCategories = async () => {
@@ -72,9 +71,7 @@ export const addproduct = async (product: any) => {
 
 export const updateProduct = async (product: any, id) => {
   return new Promise(async resolve => {
-    console.log("product api", product)
-    const data = await axios.put("http://localhost:8080/products/"+id, product);
-    console.log("delete product", data)
+    const data = await axios.put("http://localhost:8080/products/" + id, product);
     resolve(data);
   }
   )
