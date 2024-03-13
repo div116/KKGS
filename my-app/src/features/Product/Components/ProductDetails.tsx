@@ -48,9 +48,9 @@ export default function ProductDetails() {
 
   const handleCart = (e) => {
     e.preventDefault()
-    if(cart.findIndex(cartItem => cartItem.id === product.id) < 0) {
+    if(cart.findIndex(cartItem => cartItem.product.id === product.id) < 0) {
       let cartItem = {
-        ...product,
+        product: product.id,
         quantity: 1,
         user: user?.id
       }

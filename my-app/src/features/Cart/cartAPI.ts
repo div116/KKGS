@@ -19,7 +19,7 @@ export const getCartItemsByUser = async (userId) => {
 
 export const updateCart = async (update) => {
   return new Promise(async resolve => {
-    const response = await axios.put("http://localhost:8080/cart/"+update.id, update);
+    const response = await axios.patch("http://localhost:8080/cart/"+update.id, update);
     resolve(response.data);
   })
 }

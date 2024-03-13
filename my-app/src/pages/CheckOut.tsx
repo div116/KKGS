@@ -6,25 +6,25 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useForm } from 'react-hook-form'
 import { addUserAddressAsync, loggedUser } from '../features/Auth/authSlice'
 import { currentOrder, placeOrderAsync } from '../features/Orders/Orders/orderSlice'
+import { UserInfo, updateUserAsync } from '../features/user/userSlice'
 
 const CheckOut = () => {
 
     const dispatch = useDispatch()
     const [open, setOpen] = useState(true)
     const products = useSelector(cartItems);
-    const user = useSelector(loggedUser)
+    const user = useSelector(UserInfo)
     const orders = useSelector(currentOrder)
-    console.log("orders", orders)
-    const totalPrice = products.reduce((total, product) => total + product.price * product.quantity, 0)
+    const totalPrice = products.reduce((total, product) => total + product.product.price * product.quantity, 0)
     const totalItemsInCart = products.reduce((total, product) => total + parseInt(product.quantity), 0)
-    const [selectedAddress, setSelectedAddress] = useState(user.addresses[0])
+    const [selectedAddress, setSelectedAddress] = useState(null)
     const [addressIndex, setAddressIndex] = useState(0)
     const [paymentMethod, setPayment] = useState(null)
 
 
 
     const handleQuantity = (e, product) => {
-        dispatch(updateCartAsync({ ...product, quantity: e.target.value }) as any)
+        dispatch(updateCartAsync({ id: product.id, quantity: e.target.value }) as any)
     }
 
     const handleRemoveFromCart = (product) => {
@@ -41,7 +41,7 @@ const CheckOut = () => {
     }
 
     const handleOrder = () => {
-        let orderInfo = { user, products, selectedAddress, paymentMethod, totalPrice, status : "pending" }
+        let orderInfo = { user: user.id, products, selectedAddress, paymentMethod, totalPrice, totalItemsInCart,status : "pending" }
         dispatch(placeOrderAsync(orderInfo) as any)
     }
 
@@ -61,13 +61,12 @@ const CheckOut = () => {
                     <div className='lg:col-span-3'>
                         <form className='bg-white px-5 py-5' onSubmit={handleSubmit((data) => {
                             dispatch(
-                                addUserAddressAsync({
+                                updateUserAsync({
                                     ...user,
-                                    addresses: [...user.addresses, data],
+                                    addresses: Array.isArray(user.addresses) ? [...user.addresses, data] : [data],
                                 }) as any
                             );
                             reset();
-
                         })}>
                             <div className="space-y-12">
                                 <div className="border-b border-gray-900/10 pb-12">
@@ -199,7 +198,7 @@ const CheckOut = () => {
 
 
                                             <ul>
-                                                {user.addresses.map((address, index) => (
+                                                {user.addresses && user.addresses.map((address, index) => (
                                                     <li
                                                         key={index}
                                                         className="flex justify-between gap-x-6 px-5 py-5 border-solid border-2 border-gray-200"
@@ -297,11 +296,11 @@ const CheckOut = () => {
                                         <div className="flow-root">
                                             <ul role="list" className="-my-6 divide-y divide-gray-200">
                                                 {products.map((product) => (
-                                                    <li key={product.id} className="flex py-6">
+                                                    <li key={product.product.id} className="flex py-6">
                                                         <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                                                             <img
-                                                                src={product.images[0]}
-                                                                alt={product.description}
+                                                                src={product.product.images[0]}
+                                                                alt={product.product.description}
                                                                 className="h-full w-full object-cover object-center"
                                                             />
                                                         </div>
@@ -310,11 +309,11 @@ const CheckOut = () => {
                                                             <div>
                                                                 <div className="flex justify-between text-base font-medium text-gray-900">
                                                                     <h3>
-                                                                        <p>{product.title}</p>
+                                                                        <p>{product.product.title}</p>
                                                                     </h3>
-                                                                    <p className="ml-4">{`$` + product.price}</p>
+                                                                    <p className="ml-4">{`$` + product.product.price}</p>
                                                                 </div>
-                                                                <p className="mt-1 text-sm text-gray-500">{product.brand}</p>
+                                                                <p className="mt-1 text-sm text-gray-500">{product.product.brand}</p>
                                                             </div>
                                                             <div className="flex flex-1 items-end justify-between text-sm">
                                                                 <p className="text-gray-500">Qty

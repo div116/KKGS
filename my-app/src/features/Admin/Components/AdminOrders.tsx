@@ -60,7 +60,7 @@ const AdminOrders = () => {
     };
 
     useEffect(() => {
-        const pagination = { _page: page,  _per_page: Items_Per_Page };
+        const pagination = { _page: page,  _limit: Items_Per_Page };
         dispatch(fetchAllOrdersAsync({ sort, pagination }) as any);
     }, [dispatch, page, sort]);
 

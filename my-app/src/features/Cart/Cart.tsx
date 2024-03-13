@@ -7,11 +7,11 @@ const Cart = () => {
   const dispatch = useDispatch()
   const [open, setOpen] = useState(true)
   const products = useSelector(cartItems);
-  const totalPrice = products.reduce((total, product) => total + product.price * product.quantity, 0)
+  const totalPrice = products.reduce((total, product) => total + product.product.price * product.quantity, 0)
   const totalItemsInCart = products.reduce((total, product) => total + parseInt(product.quantity), 0)
 
   const handleQuantity = (e, product) => {
-    dispatch(updateCartAsync({ ...product, quantity: e.target.value }) as any)
+    dispatch(updateCartAsync({ id: product.id, quantity: e.target.value }) as any)
   }
 
   const handleRemoveFromCart = (product) => {
@@ -32,8 +32,8 @@ const Cart = () => {
                   <li key={product.id} className="flex py-6">
                     <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                       <img
-                        src={product.images[0]}
-                        alt={product.description}
+                        src={product.product.thumbnail}
+                        alt={product.product.description}
                         className="h-full w-full object-cover object-center"
                       />
                     </div>
@@ -44,9 +44,9 @@ const Cart = () => {
                           <h3>
                             <p>{product.title}</p>
                           </h3>
-                          <p className="ml-4">{`$` + product.price}</p>
+                          <p className="ml-4">{`$` + product.product.price}</p>
                         </div>
-                        <p className="mt-1 text-sm text-gray-500">{product.brand}</p>
+                        <p className="mt-1 text-sm text-gray-500">{product.product.brand}</p>
                       </div>
                       <div className="flex flex-1 items-end justify-between text-sm">
                         <p className="text-gray-500">Qty

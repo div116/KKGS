@@ -30,8 +30,8 @@ const UserOrder = () => {
                                         <li key={product.id} className="flex py-6">
                                             <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                                                 <img
-                                                    src={product.images[0]}
-                                                    alt={product.description}
+                                                    src={product.product.thumbnail}
+                                                    alt={product.product.description}
                                                     className="h-full w-full object-cover object-center"
                                                 />
                                             </div>
@@ -40,11 +40,11 @@ const UserOrder = () => {
                                                 <div>
                                                     <div className="flex justify-between text-base font-medium text-gray-900">
                                                         <h3>
-                                                            <p>{product.title}</p>
+                                                            <p>{product.product.title}</p>
                                                         </h3>
-                                                        <p className="ml-4">{`$` + product.price * product.quantity}</p>
+                                                        <p className="ml-4">{`$` + product.product.price * product.quantity}</p>
                                                     </div>
-                                                    <p className="mt-1 text-sm text-gray-500">{product.brand}</p>
+                                                    <p className="mt-1 text-sm text-gray-500">{product.product.brand}</p>
                                                 </div>
                                                 <div className="flex flex-1 items-end justify-between text-sm">
                                                     <p className="text-gray-500">Quantity = {product.quantity}</p>
