@@ -20,15 +20,13 @@ const addproduct = async (req, res) => {
 // }
 
 const fetchAllProductsByFilter = async (req, res) => {
-    let condition = {}
-    if (!req.query.admin) {
-        condition.deleted = { $ne: true }
-    }
+    // let condition = {}
+    // if (!req.query.admin) {
+    //     condition.deleted = { $ne: true }
+    // }
 
-    let query = Product.find(condition);
-    let totalProductsQuery = Product.find(condition);
-
-    console.log(req.query.category);
+    let query = Product.find();
+    let totalProductsQuery = Product.find();
 
     if (req.query.category) {
         query = query.find({ category: { $in: req.query.category.split(',') } });
@@ -54,8 +52,7 @@ const fetchAllProductsByFilter = async (req, res) => {
 
     try {
         const docs = await query.exec();
-        res.set('X-Total-Count', totalDocs);
-        res.status(200).json(docs);
+        res.status(200).json({ docs, totalDocs });
     } catch (err) {
         res.status(400).json(err);
     }

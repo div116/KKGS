@@ -26,9 +26,7 @@ export const fetchAllOrders = async (sort, pagination) => {
   }
 
   return new Promise(async resolve => {
-    // console.log("http://localhost:8080/orders?" + queryString)
-    const data = await axios.get("http://localhost:8080/orders?" + queryString);
-    console.log("api orders data", data)
-    resolve({ orders: data.data.data, totalOrders: data.data.items })
+    const response = await axios.get("http://localhost:8080/orders?" + queryString);
+    resolve({ orders: response.data.data, totalOrders: response.data.totalOrders })
   })
 }

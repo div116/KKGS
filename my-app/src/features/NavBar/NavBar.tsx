@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { cartItems } from '../Cart/cartSlice'
 import { loggedUser } from '../Auth/authSlice'
+import { UserInfo } from '../user/userSlice'
 
 const adminNavigation = [
     { name: 'Admin',location: '/admin'},,
@@ -23,7 +24,7 @@ function classNames(...classes: string[]) {
 }
 
 const NavBar = ({ children }: { children: React.ReactNode }) => {
-    const user = useSelector(loggedUser)
+    const user = useSelector(UserInfo)
     const productsInCart = useSelector(cartItems)
 
     return (
@@ -80,7 +81,7 @@ const NavBar = ({ children }: { children: React.ReactNode }) => {
                                                     <Menu.Button className="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                                                         <span className="absolute -inset-1.5" />
                                                         <span className="sr-only">Open user menu</span>
-                                                        <img className="h-8 w-8 rounded-full" src={user.imageUrl} alt="" />
+                                                        <img className="h-8 w-8 rounded-full" src={user?.imageUrl} alt="" />
                                                     </Menu.Button>
                                                 </div>
                                                 <Transition
@@ -149,7 +150,7 @@ const NavBar = ({ children }: { children: React.ReactNode }) => {
                                         </div>
                                         <div className="ml-3">
                                             {/* <div className="text-base font-medium leading-none text-white">{user.name}</div> */}
-                                            <div className="text-sm font-medium leading-none text-gray-400">{user.email}</div>
+                                            <div className="text-sm font-medium leading-none text-gray-400">{user?.email}</div>
                                         </div>
                                         <Link
                                             to="/cart"

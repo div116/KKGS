@@ -6,6 +6,7 @@ import { fetchProductByIdAsync, selectedProduct } from '../productSlice'
 import { useParams } from 'react-router-dom'
 import { addToCartAsync, cartItems, getCartItemsByUserAsync } from '../../Cart/cartSlice'
 import { loggedUser } from '../../Auth/authSlice'
+import { UserInfo } from '../../user/userSlice'
 
 const colors = [
   { name: 'White', class: 'bg-white', selectedClass: 'ring-gray-400' },
@@ -41,7 +42,7 @@ export default function ProductDetails() {
   const [selectedSize, setSelectedSize] = useState(sizes[2])
 
   const product = useSelector(selectedProduct);
-  const user = useSelector(loggedUser);
+  const user = useSelector(UserInfo);
   const cart = useSelector(cartItems)
   const dispatch = useDispatch();
   const params = useParams();

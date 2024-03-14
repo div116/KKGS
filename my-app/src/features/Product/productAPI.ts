@@ -29,9 +29,7 @@ export const fetchAllProductsByFilter = async (filter: any, sort: any, paginatio
 
   return new Promise(async resolve => {
     const response: any = await axios.get("http://localhost:8080/products?" + queryString);
-    const totalItems = response.headers['X-Total-Count'];
-    //provided static value for totalItems as i am facing difficulty to read the value of header x-total-count as it is getting filtered out in reponse
-    resolve({ products: response.data, totalItems: 99 })
+    resolve({ products: response.data.docs, totalItems: response.data.totalDocs })
   }
   )
 
@@ -71,8 +69,10 @@ export const addproduct = async (product: any) => {
 
 export const updateProduct = async (product: any, id) => {
   return new Promise(async resolve => {
-    const data = await axios.put("http://localhost:8080/products/" + id, product);
+    const data = await axios.patch("http://localhost:8080/products/" + id, product);
     resolve(data);
   }
   )
+
+
 }
