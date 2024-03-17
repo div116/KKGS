@@ -1,21 +1,25 @@
 const { User } = require('../models/User');
 const crypto = require('crypto');
+const jwt = require('jsonwebtoken');
+
+const SECRET_KEY = 'SECRET_KEY';
 
 const createUser = async (req, res) => {
     try {
         var salt = crypto.randomBytes(16);
         crypto.pbkdf2(req.body.password, salt, 310000, 32, 'sha256', async (err, hashedPassword) => {
-            const user = new User({...req.body,password: hashedPassword, salt});
+            const user = new User({ ...req.body, password: hashedPassword, salt });
             const data = await user.save();
             req.login(data, (err) => {
                 if (err) {
                     return next(err);
                 } else {
-                    return res.status(201).json({id : data.id, email: data.email, role: data.role});
+                    const token = jwt.sign({ id: data.id, email: data.email, role: data.role }, SECRET_KEY);
+                    return res.status(201).json(token);
                 }
             })
         })
-      
+
     } catch (err) {
         res.status(400).json(err);
     }

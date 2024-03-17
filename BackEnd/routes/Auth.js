@@ -6,6 +6,6 @@ const router = express.Router()
 
 router.post('/signup', createUser)
 router.post('/login',passport.authenticate('local'), loginUser)
-router.get('/login',checkUser)
+router.get('/login',passport.authenticate('jwt'),checkUser)
 
 module.exports = router
